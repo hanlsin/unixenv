@@ -1,0 +1,419 @@
+" Park, Yun Woo (yunwoo_park@tmax.co.kr) 2008/12/22
+"
+
+""" ========================================================
+""" Pathogen 설정
+""" https://github.com/tpope/vim-pathogen
+""" ========================================================
+execute pathogen#infect()
+
+set nu                  " generate a line number
+set mousehide           " when typing, mouse hide
+set nocompatible        " VI 오리지널과 호환하는 모드를 사용하지 않음
+set bs=indent,eol,start
+set nolinebreak         " Don't wrap words by default
+set noterse             "   
+set smartindent         "   
+set autoindent          " 자동 들여쓰기
+set wrap                " 자동 줄바꿈
+set ruler               " 커서가 위치한 행과 열을 표시
+set incsearch
+set nobackup            " 백업파일 생성하지 않음
+set magic               "   
+set showcmd             " 현재 명령 보이기 (r 등의 명령)
+set nowritebackup
+set history=50          " 명령어 히스토리
+set showmode            " 현재 모드 표시 (삽입, 명령, 블럭모드)
+set showmatch           " 괄호 매칭 확인
+set hlsearch            " when search, result on highlight
+set noignorecase        " 검색 시 대소문자 구별하지 않음
+set title               " 제목 표시줄에 파일명 표시
+set tags=~/tags,./tags,./../tags,./../../tags,./../../../tags
+set path=.,./include,../include,../../include,../../../include,../../../../include,/usr/include,/usr/local/include
+set novisualbell        " 경고소리를 깜빡임으로 대치하지 않음
+set nodiff
+set background=dark
+set binary
+
+"set keywordprg=edic
+"set nobackup
+
+""" ========================================================
+""" cscope 설정
+""" ========================================================
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    if filereadable("./cscope.out")
+        cs add cscope.out
+    else
+        cs add $TB_HOME/src/cscope.out
+    endif
+    set csverb
+
+    "nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    "nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    "nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+    "nmap <C-_><C-_>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+    "nmap <C-_><C-_>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    "nmap <C-_><C-_>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+endif
+
+
+""" ========================================================
+""" 파일 인코딩을 한국어로 설정
+""" ========================================================
+set fileencodings=ucs-bom,utf-8,euc-kr,cp949
+if $LANG[0] == 'k' && $LANG[1] == 'o' 
+    "set termencoding=utf-8
+    set termencoding=euc-kr
+    set encoding=euc-kr
+    let g:netrw_sort_by='time'	" name으로 sort 시
+    "  encoding 때문에 
+    "  netrw에서 파일 첫글자에
+    "  e 가 붙는 현상이 생긴다.
+endif
+"if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+"       set termencoding=korea
+"       set encoding=utf-8
+"       set nu
+"else
+"       set termencoding=korea
+"       set encoding=korea
+"       set nonu
+"endif
+
+""" ========================================================
+""" 터미널에 따른 설정 : Xterm이면 16컬러 사용
+""" ========================================================
+if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
+    set t_Co=16
+    set t_Sf=^[[3%dm
+    set t_Sb=^[[4%dm
+    set t_kb
+    fixdel
+endif
+
+""" ========================================================
+""" 문법 강조기능 사용
+""" ========================================================
+if has("syntax")
+    syntax on
+endif
+
+
+""" ========================================================
+""" GUI 모드로 실행할 경우
+""" ========================================================
+if has("gui_running")
+    set visualbell  " 비주얼벨 기능 사용
+    set guifontset=-*-fixed-medium-r-normal--14-*-75-75-*-70-iso8859-1,-*-gulim-medium-r-normal--14-140-75-75-*-140-ksc5601.1987-0
+endif
+
+filetype on             " 파일의 종류를 자동으로 인식
+filetype indent on
+filetype plugin on
+
+""" ========================================================
+""" C indenting
+""" http://vimdoc.sourceforge.net/htmldoc/indent.html
+""" ========================================================
+set cindent
+set cino=t0:0   " t0 function return type indent를 0 
+                " :0 switch와 case를 동일 indent로
+
+au BufWinLeave *.py mkview
+au BufWinEnter *.py silent loadview
+au BufWinLeave *.c mkview
+au BufWinEnter *.c silent loadview
+au BufWinLeave *.h mkview
+au BufWinEnter *.h silent loadview
+au BufWinLeave .vimrc mkview
+au BufWinEnter .vimrc silent loadview
+
+au BufRead,BufNewFile *.txt setfiletype txt
+
+if !exists("autocommands_loaded")
+    let autocommands_loaded = 1
+    augroup C
+        autocmd BufRead *.c set cindent
+    augroup END
+endif
+
+""" ========================================================
+""" Windows resizing mappings
+""" ========================================================
+"map <silent> <Ah> <Cw><
+"map <silent> <Aj> <CW>-
+"map <silent> <Ak> <CW>+
+"map <silent> <Al> <Cw>>
+"map <C-kPlus> <C-W><kPlus>
+
+""" tag explrorer configuration
+"nnoremap <silent> <F8> :TagExplorer<CR>
+nnoremap <silent> <F4> :Tlist<CR>
+nnoremap <silent> <F5> :Explore<CR>
+"map <F6> <Plug>Cvsdiff
+"map <F7> <Plug>Cvsdiffv
+let TE_Use_Right_Window=1
+
+function! InsertCXXSkeleton()
+    0r ~/.vim/skeleton/skeleton.cxx
+    "       call InsertCommentTag()
+    call InsertCXXInclude()
+    call InsertFnameInComment()
+    call InsertDoxygenName()
+endfunction
+
+function! InsertCSkeleton()
+    0r ~/.vim/skeleton/skeleton.c
+    "       call InsertCommentTag()
+    call InsertCInclude()
+    call InsertFnameInComment()
+    call InsertDoxygenName()
+endfunction
+
+function! InsertHeaderSkeleton()
+    0r ~/.vim/skeleton/skeleton.h
+    "       call InsertCommentTag()
+    call InsertFname()
+    call InsertFnameInComment()
+    call InsertDoxygenName()
+endfunction
+
+function! InsertCommentTag()
+    let fname = expand("%:t")
+    call search("/*")
+    exe "normal A" . fname . " --"
+endfunction
+
+function! InsertCXXInclude()
+    let fname = expand("%:t")
+    let fname = substitute(fname, "\\.cxx", ".h", "g")
+    call search("#include")
+    exe "normal A " . "\"" . fname . "\""
+endfunction
+
+function! InsertCInclude()
+    let fname = expand("%:t")
+    let fname = substitute(fname, "\\.c", ".h", "g")
+    call search("#include")
+    exe "normal A " . "\"" . fname . "\""
+endfunction
+
+function! InsertFname()
+    " Convert newname.h to _NEWNAME_H_
+    let fname = expand("%:t")
+    let cname = "C" . substitute(fname, "\.h", "", "g")
+    let fname = toupper(fname)
+    let fname = substitute(fname, "\\.", "_", "g")
+    " Search for #ifndef
+    call search("#ifndef")
+    "exe "normal A " . "___" . fname . "___"
+    exe "normal A " . "_" . fname
+    " Search for #define
+    call search("#define")
+    "exe "normal A " . "___" . fname . "___"
+    exe "normal A " . "_" . fname
+    " Search for #endif
+    call search("#endif /*")
+    "exe "normal A " . "___" . fname . "___ */"
+    exe "normal A " . "_" . fname . " */"
+endfunction
+
+function! InsertDoxygenName()
+    " Convert newname.h to _NEWNAME_H_
+    let fname = expand("%:t")
+    let fname = toupper(fname)
+    " Search for DOXYGEN
+    call search("DOXYGEN_")
+    exe "normal A" . fname . "_SKIP_THIS */"
+endfunction
+
+function! InsertFnameInComment()
+    let fname = expand("%:t")
+    call search("file")
+    exe "normal A " . fname
+endfunction
+
+"
+" vim -b : edit binary using xxd-format!
+augroup Binary
+    au!
+    au BufReadPre  *.bin let &bin=1
+    au BufReadPost *.bin if &bin | %!xxd
+    au BufReadPost *.bin set ft=xxd | endif
+    au BufWritePre *.bin if &bin | %!xxd -r
+    au BufWritePre *.bin endif
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
+augroup END
+
+""" ========================================================
+""" SecureCRT를 위한 설정
+""" ========================================================
+if $TERM =~ "linux" || $TERM =~ "ansi"
+    set t_Co=256
+    set t_Sf=^[[3%p1%dm
+    set t_Sb=^[[4%p1%dm
+    colorscheme 256-jungle
+    syntax on
+elseif $TERM =~ "screen"
+    set t_Co=256
+    set t_Sf=^[[3%p1%dm
+    set t_Sb=^[[4%p1%dm
+    "colorscheme desert
+    colorscheme torte
+    syntax on
+else
+    set t_Co=256
+    set t_Sf=^[[3%p1%dm
+    set t_Sb=^[[4%p1%dm
+    colorscheme desert
+    "colorscheme torte
+    syntax on
+endif
+
+""" ========================================================
+""" Tibero 개발을 위한 설정
+""" ========================================================
+if filereadable($TB_HOME . "/dev-util/vimrc")
+    let unuse_newfold=1
+    let use_svn_blame=1
+    let use_svn_diff=1
+    let unuse_tb_cscope=0
+    let use_tb_session=0
+
+    so $TB_HOME/dev-util/vimrc
+
+    if filereadable($TB_HOME . "/dev-util/vimrc.db1team")
+        so $TB_HOME/dev-util/vimrc.db1team
+    endif
+
+    autocmd BufNewfile,BufRead *.tbco :set ft=cobol
+    autocmd BufNewfile,BufRead *.tbc :set ft=c
+
+    " tool 쪽 소스도 tag에 포함.
+    set tags +=$TB_HOME/src/tags,$TB_HOME/tools/src/tags
+    set path +=$TB_HOME/src/include
+else
+    if has("autocmd")
+        function LoadSkeletonTemplate(file)
+            if a:file =~ '.*\.cxx$'
+                call InsertCXXSkeleton()
+            elseif a:file =~ '.*\.c$'
+                call InsertCSkeleton()
+            elseif a:file =~ '.*\.h$'
+                call InsertHeaderSkeleton()
+            endif
+        endfunction
+
+        autocmd BufNewFile * call LoadSkeletonTemplate(@%)
+    endif
+endif
+
+""" ========================================================
+""" Folding 설정
+"""         - zo : open
+"""         - zc : close
+"""         - zR : open all
+"""         - zM : close all
+""" ========================================================
+"set foldmarker=#if,#endif
+"set foldmethod=marker
+
+""" ========================================================
+""" TAB 설정
+"""         - ts    : tabstop. size of tab
+"""         - sts   : softtabstop. size of soft tab
+"""         - sw    : shiftwidth. size of indent
+"""         - expandtab/noexpandtab
+""" ========================================================
+set ts=4 sw=4 sts=4 expandtab
+
+""" ========================================================
+""" vim-go 설정
+""" https://github.com/fatih/vim-go
+""" ========================================================
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_autosave = 1
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+
+""" ========================================================
+""" Syntastic 설정
+""" https://github.com/scrooloose/syntastic
+""" ========================================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
+
+""" ========================================================
+""" tagbar 설정
+""" https://github.com/majutsushi/tagbar
+""" ========================================================
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+

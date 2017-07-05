@@ -1,0 +1,116 @@
+#!/bin/bash
+#
+# @brief  Set environment for the Golang environment.
+#
+# @author   Yun Woo Park
+
+# check GOROOT
+if [ ! ${GOROOT} ];
+then
+	export GOROOT=/usr/local/go
+fi
+
+if [ -d "$GOROOT" ];
+then
+	# add GOROOT/bin to PATH
+	export PATH=$GOROOT/bin:$PATH
+fi
+
+# backup original environment variables
+export _YPGO_ORIGINAL_PATH=$PATH
+export _YPGO_ORIGINAL_CDPATH=$CDPATH
+export _YPGO_ORIGINAL_GOPATH=$GOPATH
+
+#**NOTE:** If you are using Go 1.5, you must manually enable the vendor
+# experiment by setting the `GO15VENDOREXPERIMENT` environment variable to `1`.
+# This step is not required for Go 1.6.
+#export GO15VENDOREXPERIMENT=1
+
+# to check tools to develop
+function fn_go_checktools ()
+{
+	declare -A tools=(
+		["dlv"]='cmds=("go get -u github.com/derekparker/delve/cmd/dlv")'
+		["glide"]='cmds=("go get -u github.com/Masterminds/glide")'
+		["gocode"]='cmds=("go get -u github.com/nsf/gocode")'
+		["godef"]='cmds=("go get -u github.com/rogpeppe/godef")'
+		["golint"]='cmds=("go get -u github.com/golang/lint/golint")'
+		["gomodifytags"]='cmds=("go get -u github.com/fatih/gomodifytags")'
+		["go-outline"]='cmds=("go get -u github.com/lukehoban/go-outline")'
+		["gopkgs"]='cmds=("go get -u github.com/tpng/gopkgs")'
+		["gorename"]='cmds=("go get -u golang.org/x/tools/cmd/gorename")'
+		["goreturns"]='cmds=("go get -u sourcegraph.com/sqs/goreturns")'
+		["go-symbols"]='cmds=("go get -u github.com/newhook/go-symbols")'
+		["guru"]='cmds=("go get -u golang.org/x/tools/cmd/guru")'
+		["gotests"]='cmds=("go get -u github.com/cweill/gotests/...")'
+	)
+
+	for tool_name in "${!tools[@]}"
+	do
+		line='-------------------------'
+
+		file=$GOPATH/bin/$tool_name
+		if [ -f "$file" ]
+		then
+			#echo "	'$file' is found."
+			printf "Golang tool: \033[1;31m%s\033[0m %s [OK]\n" $tool_name "${line:${#tool_name}}"
+			continue
+		fi
+
+		printf "Golang tool: Installing \033[1;31m$tool_name\033[0m ...\n"
+
+		eval ${tools[$tool_name]}
+
+		i=0
+		while [ "x${cmds[$i]}" != "x" ]
+		do
+			cmd=${cmds[$i]}
+			if eval $cmd
+			then
+				i=$(($i + 1))
+				echo "    '$file' is installed."
+			else
+				#echo "Fail to install $tool_name: $cmd"
+				printf "Golang tool: \033[1;31m%s\033[0m %s [FAIL]\n" $tool_name "${line:${#tool_name}}"
+				return
+			fi
+		done
+	done
+}
+
+# to set go environment
+function fn_go_initenv ()
+{
+	if [ ! -z $1 ] && [ "__GOTO_DEFAULT__" = $1 ]
+	then
+		# recover original variables
+		export GOPATH=$_YPGO_ORIGINAL_GOPATH
+		export PATH=$_YPGO_ORIGINAL_PATH
+		export CDPATH=$_YPGO_ORIGINAL_CDPATH
+
+		return
+	elif [ -z $1 ] || [ ! -d $1 ]
+	then
+		echo "ERROR: Need argument: ${FUNCNAME[0]} [<dir>]"
+
+		return
+	fi
+
+	GOPATH=$_YPGO_ORIGINAL_GOPATH
+	PATH=$_YPGO_ORIGINAL_PATH
+	CDPATH=$_YPGO_ORIGINAL_CDPATH
+
+	work_path=$1
+
+	export GOPATH=$work_path/go
+	export PATH=$GOPATH/bin:$PATH
+	#export CDPATH=$GOPATH/src/github.com:$work_path:$CDPATH
+
+	cd $work_path
+
+	alias home='cd $work_path'
+	alias gopath='cd $GOPATH'
+	alias github='cd $GOPATH/src/github.com'
+
+	fn_go_checktools
+}

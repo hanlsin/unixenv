@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# @brief  Set environment for compound commands.
+#
+# @author   Yun Woo Park
+
+# find the process ID
+# 'findpid eclimd' or 'findpid yun eclimd'
+function fn_findpid()
+{
+	#echo $*
+	#echo $@
+	#echo $#
+	args=("$@")
+	if [ $# != 0 ]; then
+		argsnum=${#args[@]}
+	else
+		argsnum=0
+	fi
+	#echo ${args[@]}
+	#echo $argsnum
+
+	if [ $argsnum = 0 ]; then
+		ps -fu `whoami`
+		return
+	elif [ $argsnum = 1 ]; then
+		user=`whoami`
+		keyword=${args[0]}
+	elif [ $argsnum = 2 ]; then
+		user=${args[0]}
+		keyword=${args[1]}
+	else
+		return
+	fi
+
+	ps -fu $user | grep $keyword | grep -v 'grep' | awk '{printf("[%s] ",$2);for(i=8;i<=NF;i++)printf("%s%s",$i,(i!=NF)?OFS:ORS)}' | grep $keyword
+}

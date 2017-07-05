@@ -1,0 +1,9 @@
+""" Yun Woo Park (hanlsin@gmail.com) 4/13/2017
+""" vim configuration for Solicity of Ethereum Smart Contract.
+
+""" Indentation
+au BufNewFile,BufRead *.sol
+    \ set expandtab |
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2

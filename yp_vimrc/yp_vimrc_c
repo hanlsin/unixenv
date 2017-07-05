@@ -1,0 +1,18 @@
+""" Yun Woo Park (hanlsin@gmail.com) 12/13/2016
+""" vim configuration for C.
+
+""" Indentation
+au BufNewFile,BufRead *.c,*.h
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+""" Flagging unnecessary whitespace
+" use the below highlight group when displaying bad whitespace is desired.
+highlight BadWhitespace ctermbg=red guibg=red
+" make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.c,*.h match BadWhitespace /\s\+$/

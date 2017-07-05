@@ -1,0 +1,176 @@
+#!/bin/bash
+#
+# @brief  Set environment for the Python environment.
+#
+# @author   Yun Woo Park
+
+########################
+# for Python2
+##
+if [ ! ${PYTHON2_HOME} ]
+then
+	export PYTHON2_HOME=/usr/local/lib/python2.7
+fi
+if [ ! ${PYTHON2_PATH} ]
+then
+	export PYTHON2_PATH=/usr/bin/python2
+fi
+
+
+########################
+# for Python3
+##
+if [ ! ${PYTHON3_HOME} ]
+then
+	export PYTHON3_HOME=/usr/local/lib/python3.5
+fi
+if [ ! ${PYTHON3_PATH} ]
+then
+	export PYTHON3_PATH=/usr/bin/python3
+fi
+
+
+########################
+# for Anaconda2
+##
+if [ ! ${ANACONDA2_HOME} ]
+then
+	export ANACONDA2_HOME=$HOME/Applications/anaconda2
+fi
+
+# setting
+if [ -d "$ANACONDA2_HOME" ]
+then
+	#export PATH=$ANACONDA2_HOME/bin:$PATH
+	#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ANACONDA2_HOME/lib
+	alias ana2pip=$ANACONDA2_HOME/bin/pip
+	alias conda2=$ANACONDA2_HOME/bin/conda
+	export ANACONDA2_PYTHON_PATH=$ANACONDA2_HOME/bin/python
+fi
+
+
+########################
+# for Anaconda3
+##
+# check
+if [ ! ${ANACONDA3_HOME} ]
+then
+	export ANACONDA3_HOME=$HOME/Applications/anaconda3
+fi
+
+# setting
+if [ -d "$ANACONDA3_HOME" ]
+then
+	#export PATH=$ANACONDA3_HOME/bin:$PATH
+	#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ANACONDA3_HOME/lib
+	alias ana3pip=$ANACONDA3_HOME/bin/pip
+	alias conda3=$ANACONDA3_HOME/bin/conda
+	export ANACONDA3_PYTHON_PATH=$ANACONDA3_HOME/bin/python
+fi
+
+
+########################
+# for Virtualenv
+##
+# to activate virtualenv.
+#source ~/virtualenv/project/bin/activate'
+# to deactivate, invoke the command.
+# (project)$ deactivate
+
+# to make and invoke virtualenv
+function fn_py_virtualenv()
+{
+	org_ld_lib_path=$LD_LIBRARY_PATH
+	new_ld_lib_path=$org_ld_lib_path
+	python_path=$ANACONDA3_PYTHON_PATH
+
+	# check arguments
+	while [ -n "$1" ]
+	do
+		case "$1" in
+			'-d')
+				shift
+				project_dir=$1
+				;;
+			'-p')
+				shift
+				if [ $1 = 'p2' ]
+				then
+					python_path=$PYTHON2_PATH
+				elif [ $1 = 'p3' ]
+				then
+					python_path=$PYTHON3_PATH
+				elif [ $1 = 'a2' ]
+				then
+					new_ld_lib_path=$ANACONDA2_HOME/lib:$org_ld_lib_path
+					python_path=$ANACONDA2_PYTHON_PATH
+				elif [ $1 = 'a3' ]
+				then
+					new_ld_lib_path=$ANACONDA3_HOME/lib:$org_ld_lib_path
+					python_path=$ANACONDA3_PYTHON_PATH
+				fi
+				;;
+			'-n')
+				shift
+				project_name=$1
+				;;
+			*)
+				echo "Wrong argument: $1"
+				exit
+		esac
+		shift
+	done
+
+	project_path=$project_dir/$project_name
+
+	# if not exist, create diretory and setup.
+	if [ ! -d "$project_path" ]
+	then
+		#if [ $# < 2 ]
+		#then
+		#	echo "Need more arguments to create virtualenv:"
+		#	echo " <project_dir> <p3/p2/a3>"
+		#	return
+		#fi
+
+		export LD_LIBRARY_PATH=$new_ld_lib_path
+		cmd='virtualenv -p $python_path $project_path'
+		if eval $cmd; then
+			echo "Succeed in running virtualenv: $project_path"
+
+			cd $project_path
+
+			# append additional info to bin/activate
+			printf "\n\n# additional info from YP
+export LD_LIBRARY_PATH=\"$new_ld_lib_path\"
+alias bye=\"deactivate;export LD_LIBRARY_PATH=$org_ld_lib_path\"
+\n" >> bin/activate
+
+			# Start virtualenv. If want to deavtivate, 
+			# call 'bye'
+			# (project)$ bye
+			source bin/activate
+		else
+			echo "Fail to run virtualenv: $project_path"
+
+			# recover environment variable
+			unset LD_LIBRARY_PATH
+			export LD_LIBRARY_PATH=$org_ld_lib_path
+
+			return
+		fi
+	else
+		# Start virtualenv. If want to deavtivate, call 'deactivate'
+		# (project)$ deactivate
+		source $project_path/bin/activate
+		cd $project_path
+	fi
+}
+
+
+########################
+# for Python3 VTK
+##
+# TODO: when setting below, 'import vtk' in python is error.
+#export PYTHONPATH=/usr/local/lib/python3.5/site-packages/vtk:$PYTHONPATH
+#export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH

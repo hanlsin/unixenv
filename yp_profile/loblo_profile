@@ -1,0 +1,4 @@
+
+# Connect to loblo_init
+alias loblo_init="ssh -i /home/yun/share/work/loblo/AWS/.ssh/MyKeyPair.pem ubuntu@52.38.180.187"
+

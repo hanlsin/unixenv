@@ -1,0 +1,420 @@
+#!/bin/bash
+#
+# @brief  To develope Tibero.
+#
+# @author   Yun Woo Park
+
+# check environment variable HOME exist
+if env | grep -q ^HOME=
+then
+    export HOME=/users/yunwoopark
+fi
+
+function vgrep()
+{
+	find . ! \( -type d -name .build -prune \) -name "*.[ch|y]" | \
+		xargs egrep -n "$@" >/tmp/vgrep-`whoami`.log && \
+		vim -q /tmp/vgrep-`whoami`.log && \
+		rm /tmp/vgrep-`whoami`.log
+}
+
+function jc()
+{
+	local i=0 
+	local start=${1:-0}
+	shift
+	local end=${1:-0}
+	shift
+	local ch=0
+	local org=`pwd`
+	#tbdown abnormal
+	# for d in `find $TB_HOME/src ! \( -type d -name "nbsvr" -prune \) -a -type d -name "tests" | xargs -L 1 dirname | sort`; do
+	for d in `find $TB_HOME/src ! \( -type d -name "nbsvr" -prune \) \
+		-a -type f -name "Jamfile"                        \
+		| xargs grep -l "^ *\<Fit\|^ *\<ScriptTest\>"          \
+		| xargs -L 1 dirname | sort | uniq`; do
+	i=$(($i+1))
+	name=`echo $d | sed -e "s,$TB_HOME/src/,,g"`
+	[ $start = "0" ] && echo "$i. $name" && continue
+	if [ "$i" = "$start" ] || expr $name : ".*/$start/.*" >/dev/null 2>&1; then
+		ch=1;
+	fi
+	[ $ch -eq 0 ] && continue
+	cd $d
+	echo "-----------------------------------------------------------------"
+	echo "$i. check started. $name"
+	jam -sCHECK_OPT=-s check
+	if [ $? -ne 0 ]; then
+		echo "$i ($name) FAIL. "
+		return
+	fi
+	echo "checked successfully. $name"
+	echo "-----------------------------------------------------------------"
+	echo ""
+	if [ "$i" = "$end" ] || expr $name : ".*/$end/.*" >/dev/null 2>&1; then
+		return
+	fi
+done;
+if [ $ch -eq 0 ]; then
+	echo ""
+	echo "Usage: jc start_module [end module] "
+	echo "Example:"
+	echo " \$jc 1           : check all module"
+	echo " \$jc 3           : check all module after 3th"
+	echo " \$jc opt tc      : check from opt to tc"
+	echo " \$jc 3 4         : check from 3th to 5th"
+fi
+cd $org
+}
+
+function sd()
+{
+	args=$*
+	echo $args
+
+	lang_env=$LANG
+	# diff ������ ���� ���ڸ� ������ ����.
+	LANG=en_US.utf8
+
+	svn diff $*
+
+	LANG=$lang_env
+}
+
+# set JAVA_HOME
+function jdk()
+{
+	if test ! $1; then
+		echo 'using "jdk 4" or "jdk 5" or "jdk 6" or "jdk 7".'
+		unset java
+		return
+	fi
+
+	if [ '4' = $1 ] 
+	then
+		export JAVA_HOME=$HOME/java/j2sdk1.4.2_19
+		export JAVA_VERSION=1.4
+	elif [ '5' = $1 ]
+	then
+		export JAVA_HOME=$HOME/java/jdk1.5.0_22
+		export JAVA_VERSION=1.5
+	elif [ '6' = $1 ]
+	then
+		export JAVA_HOME=$HOME/java/jdk1.6.0_45
+		export JAVA_VERSION=1.6
+	elif [ '7' = $1 ]
+	then
+		export JAVA_HOME=$HOME/java/jdk1.7.0_45
+		export JAVA_VERSION=1.7
+	else
+		echo 'using "jdk 4" or "jdk 6" or "jdk 7".'
+		unset java
+		return
+	fi
+
+	export PATH=$JAVA_HOME/bin:$PATH
+	alias java=$JAVA_HOME/bin/java
+}
+
+# GDB MODE
+function gm()
+{
+	export PROMPT_COLOR1=${PROMPT_COLOR1:-33}
+	export PROMPT_COLOR2=${PROMPT_COLOR2:-34}
+	export PROMPT_COLOR3=${PROMPT_COLOR3:-31}
+	export PROMPT_COLOR4=${PROMPT_COLOR4:-35}
+
+	if [ $TB_SID ]
+	then
+		PS1='\[\033[01;${PROMPT_COLOR1}m\]\u@\h\[\033[00m\] \[\033[01;${PROMPT_COLOR4}m\][GDB_MODE]\[\033[00m\] \[\033[01;${PROMPT_COLOR3}m\][$TB_SID]\[\033[00m\] \[\033[01;${PROMPT_COLOR2}m\]\w\$ \[\033[00m\]'
+	else
+		PS1='\[\033[01;${PROMPT_COLOR1}m\]\u@\h\[\033[00m\] \[\033[01;${PROMPT_COLOR4}m\][GDB_MODE]\[\033[00m\] \[\033[01;${PROMPT_COLOR2}m\]\w\$ \[\033[00m\]'
+	fi
+
+	export LANG=ko_KR.EUC-KR
+}
+
+# NO GDB MODE
+function nogm()
+{
+	if [ $TB_SID ]
+	then
+		custom_prompt $TB_SID
+	else
+		fancy_prompt
+	fi
+
+	export LANG=$TB_ORIGINAL_LANG
+}
+
+function notb()
+{
+	fancy_prompt
+
+	unset TB_HOME
+	unset TB_SID
+	unset TB_VERSION
+	unset HD_HOME
+
+	export HOME=$TB_ORIGINAL_HOME
+	export PATH=$TB_ORIGINAL_PATH
+	export CDPATH=$TB_ORIGINAL_CDPATH
+	export LD_LIBRARY_PATH=$TB_ORIGINAL_LD_LIBRARY_PATH
+	export LIBPATH=$TB_ORIGINAL_LIBPATH
+	export SVN_EDITOR=$TB_ORIGINAL_SVN_EDITOR
+	export CLASSPATH=$TB_ORIGINAL_CLASSPATH
+
+	cd $HOME
+}
+
+function jaa()
+{
+	cd $TB_HOME/src
+	echo "" >  $TB_HOME/jaa.error
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+	echo "START : "`date` >> $TB_HOME/jaa.error
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+	echo "CLEAN ..." >> $TB_HOME/jaa.error
+	echo "-----------------" >> $TB_HOME/jaa.error
+	jam clean 2>> $TB_HOME/jaa.error
+	jam realclean 2>> $TB_HOME/jaa.error
+	jam tool-clean 2>> $TB_HOME/jaa.error
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+	echo "CONFIGURE ..." >> $TB_HOME/jaa.error
+	echo "-----------------" >> $TB_HOME/jaa.error
+	cd autoconf
+	./configure 2>> $TB_HOME/jaa.error
+	jam 2>> $TB_HOME/jaa.error
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+
+	cd $TB_HOME/src
+
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+	echo "BUILD TOOL ..." >> $TB_HOME/jaa.error
+	echo "-----------------" >> $TB_HOME/jaa.error
+	jam tool 2>> $TB_HOME/jaa.error
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+	echo "BUILD ..." >> $TB_HOME/jaa.error
+	echo "-----------------" >> $TB_HOME/jaa.error
+	jam -j12 2>> $TB_HOME/jaa.error
+	jam 2>> $TB_HOME/jaa.error
+	jam tags 2>> $TB_HOME/jaa.error
+	echo "---------------------------------------" >> $TB_HOME/jaa.error
+
+	cd $TB_HOME
+	cat $TB_HOME/jaa.error
+}
+
+function init_tb()
+{
+	cd $1
+	. tbenv `pwd` $2
+	source $TB_HOME/dev-util/bashrc
+
+	custom_prompt $TB_SID
+
+	# check prebuilt directory of tools.
+	if [ ! -h "$TB_HOME/tools/prebuilt" ]; then
+		ln -s $HOME/scm/tibero_prebuilt $TB_HOME/tools/prebuilt
+	fi
+
+	export SVN_EDITOR=$TB_HOME/dev-util/svn-log-format.sh
+	alias svndiff='svn diff --diff-cmd=$TB_HOME/dev-util/svndiff '
+
+	alias home='cd $TB_HOME'
+
+	export TBGW_HOME=$TB_HOME/client/gateway
+
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TB_ORIGINAL_LD_LIBRARY_PATH
+
+	# mount ram disk
+	$HOME/dev-util/create_ramdisk_inst.sh
+}
+
+function tb()
+{
+	if [ -z "$1" ]; then
+		ver='trunk'
+	else
+		ver=$1
+	fi
+
+	tbhome=$HOME/scm/$ver
+	if [ ! -d $tbhome ]; then
+		echo "Directory does not exist: $tbhome"
+		return 1
+	fi
+
+	if [ -z "$2" ]; then
+		sid='tb_'$ver
+	else
+		sid=$2
+	fi
+
+	notb;nohub
+	init_tb $tbhome $sid
+}
+
+function s()
+{
+	release_home=$HOME/scm/release/5_rel
+
+	ver='S'$1
+	tbhome=$release_home/$ver
+	if [ -d $tbhome ]; then
+		cd $tbhome
+	else
+		echo "Directory does not exist: $tbhome"
+
+		ver='U'$1
+		tbhome=$release_home/$ver
+		if [ -d $tbhome ]; then
+			cd $tbhome
+		else
+			echo "Directory does not exist: $tbhome"
+			cd $release_home
+			return 1
+		fi
+	fi
+
+	if [ -z "$2" ]; then
+		sid=$ver
+	else
+		sid=$2
+	fi
+
+	notb;nohub
+	init_tb $tbhome $sid
+}
+
+function nohub()
+{
+	fancy_prompt
+
+	unset HUB_HOME
+	unset HUB_VERSION
+
+	export HOME=$TB_ORIGINAL_HOME
+	export PATH=$TB_ORIGINAL_PATH
+	export CDPATH=$TB_ORIGINAL_CDPATH
+	export LD_LIBRARY_PATH=$TB_ORIGINAL_LD_LIBRARY_PATH
+	export LIBPATH=$TB_ORIGINAL_LIBPATH
+	export SVN_EDITOR=$TB_ORIGINAL_SVN_EDITOR
+	export CLASSPATH=$TB_ORIGINAL_CLASSPATH
+
+	cd $HOME
+}
+
+function hub()
+{
+	notb;nohub
+
+	if [ -z "$1" ]; then
+		echo "Need version info. like 'hub trunk'."; return
+	fi
+
+	ver=$1
+
+	cd $HOME/scm/datahub/$ver
+	. hubenv `pwd` $ver
+
+	custom_prompt "HUB_$HUB_VERSION"
+
+	export SVN_EDITOR=$HUB_HOME/dev-util/svn-log-format.sh
+	alias svndiff='svn diff --diff-cmd=$HUB_HOME/dev-util/svndiff '
+
+	alias home='cd $HUB_HOME'
+}
+
+function patch_view()
+{
+	vi $HOME/scm/release/5_rel/patch/$1
+}
+
+function ims()
+{
+	if [ -z "$1" ]; then
+		imshome=$HOME/ims_work
+		cd $imshome
+		ls
+	else
+		imshome=$HOME/ims_work/$1
+		if [ ! -d $imshome ]; then
+			echo "Directory does not exist: $imshome"
+			ims
+			return 1
+		fi
+		cd $imshome
+	fi
+}
+
+function tb_env_init()
+{
+	# LANG for SecureCRT
+	#export LANG=ko_KR.UTF-8
+	# LANG for iputty
+	export LANG=ko_KR.EUCKR
+	export EDITOR=vim
+
+	# 29-white, 30-black, 31-red, 32-green, 33-yellow, 34-pupple, 35-pink, 36-sky
+	export PROMPT_COLOR1=33
+	export PROMPT_COLOR2=32
+
+	export PATH=$HOME/dev-util:$PATH
+
+	ulimit -c unlimited
+
+	# backup original environment variables
+	export TB_ORIGINAL_HOME=$HOME
+	export TB_ORIGINAL_PATH=$PATH
+	export TB_ORIGINAL_CDPATH=$CDPATH
+	export TB_ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+	export TB_ORIGINAL_LIBPATH=$LIBPATH
+	export TB_ORIGINAL_SVN_EDITOR=$SVN_EDITOR
+	export TB_ORIGINAL_CLASSPATH=$CLASSPATH
+	export TB_ORIGINAL_LANG=$LANG
+	export TB_ORIGINAL_JAVA_HOME=$JAVA_HOME
+
+	# ORACLE
+	export ORACLE_HOME=$HOME/oracle/instantclient_11_2
+	export ORACLE_SID=ora11g
+	export TNS_ADMIN=$ORACLE_HOME
+	export NLS_LANG=KOREAN_KOREA.KO16MSWIN949
+	export PATH=$ORACLE_HOME:$PATH
+	export LD_LIBRARY_PATH=$ORACLE_HOME:$LD_LIBRARY_PATH
+
+	# TIBERO
+	alias trunk='tb trunk trunk'
+	alias trunk2='tb trunk2 trunk2'
+	alias trunk_cmake='tb trunk_cmake trunk_cmake'
+	alias tb4sp1='tb 4sp1'
+	alias tmc2='tb tmc2;export HD_HOME=$TB_HOME/horde;export PATH=$HD_HOME/bin:$PATH;export LD_LIBRARY_PATH=$HD_HOME/lib:$LD_LIBRARY_PATH'
+	alias tid='tmc2'
+	alias mayo='tb mayo mayo'
+	alias tb5sp1='tb 5sp1'
+	alias hubt='hub trunk'
+
+	# 'byobu' with 'screen'
+	#    alias new="byobu -S `uname -n`"
+	#    alias xr="byobu -xr"
+
+	# alias
+	alias vim='vim -u $HOME/.vimrc'
+	alias vi='vim'
+	alias xgrep="find . -name '*.[ch]' -o -name '*.java' -o -name '*.template' -o -name '*.template_4_dbg' | grep -v '\.build' | xargs egrep -n "
+	alias valgrind="valgrind -v --tool=memcheck --trace-children=yes --log-file=VGLOG --num-callers=20 --leak-check=yes --show-reachable=no --leak-resolution=high"
+	alias callgrind="callgrind --dump-instr=yes --trace-children=yes --collect-jumps=yes --collect-alloc=yes"
+	alias sc='svn --encoding euckr ci'
+
+	# TIBERO patch
+	alias pa='$HOME/dev-util/patch_apply.sh'
+	alias pv='patch_view'
+}
+
+#tb_env_init

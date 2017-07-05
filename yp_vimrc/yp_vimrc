@@ -1,0 +1,255 @@
+""" Yun Woo Park (hanlsin@gmail.com) 1/12/2017
+
+""" ========================================================
+""" VIM 기본 설정
+"set nu                      " generate a line number
+set mousehide               " when typing, mouse hide
+set bs=indent,eol,start     " when backspace key won't move in Insert mode.
+set nolinebreak             " don't wrap words by default
+set autoindent              " 자동 들여쓰기
+set wrap                    " 자동 줄바꿈
+set ruler                   " 커서가 위치한 행과 열을 표시
+set nobackup                " 백업파일 생성하지 않음
+set noswapfile              " swap 파일 생성하지 않음
+set history=50              " 명령어 히스토리
+set showmode                " 현재 모드 표시 (삽입, 명령, 블럭모드)
+set showcmd                 " 현재 명령 보이기 (r 등의 명령)
+set showmatch               " 괄호 매칭 확인
+set hlsearch                " when search, result on highlight
+set noignorecase            " 검색 시 대소문자 구별하지 않음
+set title                   " 제목 표시줄에 파일명 표시
+set novisualbell            " 경고소리를 깜빡임으로 대치하지 않음
+set binary                  " to view a binary file in a hex view
+set noexpandtab             " Tab 대신 Space 삽입: expandtab/noexpandtab
+"set ts=4                    " tabstop. size of tab
+"set sw=4                    " shiftwidth. size of indent
+"set sts=4                   " softtabstop. size of soft tab
+"set splitbelow             " set new window is below
+set splitright              " set new window is right 
+set encoding=utf-8          " set encoding as UTF-8
+set term=screen-256color    " set terminal same as tmux.
+set clipboard=unnamed       " access the system clipboard on OSX.
+
+" 문법 강조기능 사용
+if has("syntax")
+	syntax on
+endif
+
+" change <leader> Key from default '\'
+let mapleader=","
+
+" enable folding
+set foldmethod=indent
+set foldlevel=99
+" enable folding with the spacebar
+nnoremap <space> za
+
+" When editing a file, always jump to the last cursor position.
+autocmd BufReadPost * if line("'\"") && line("'\"") <= line("$") | exe "normal `\"" | endif
+
+""" ========================================================
+""" Vundle 설정
+""" https://github.com/VundleVim/Vundle.vim
+""" at first: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" vi 오리지널과 호환하는 모드를 사용하지 않음
+set nocompatible    " required
+" 파일의 종류를 자동으로 인식하지 않음
+filetype off        " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+"" Code Folding
+Plugin 'tmhedberg/SimpylFold'
+
+"" Auto-complete
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'klen/rope-vim'
+Plugin 'ervandew/supertab'
+
+"" Python Syntax Checking/Highlighting
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/Pydiction'
+" PEP8 checking
+Plugin 'nvie/vim-flake8'
+" auto-indentation
+Plugin 'vim-scripts/indentpython.vim'
+
+"" HTML Syntax Checking/Highlighting
+" isnowfy only compatible with python not python3
+if has("python")
+	Plugin 'isnowfy/python-vim-instant-markdown'
+endif
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'nelstrom/vim-markdown-preview'
+
+"" Color Schemes
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
+"" File Browsing NERDTree
+Plugin 'scrooloose/nerdtree'
+" use tabs.
+Plugin 'jistr/vim-nerdtree-tabs'
+
+"" Super Searching
+" search for basically anything from VIM. CTRL-P <keyword>
+Plugin 'kien/ctrlp.vim'
+
+"" Git Integration
+Plugin 'tpope/vim-fugitive'
+
+"" Powerline
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+"" Golang
+Plugin 'fatih/vim-go'
+
+"" Javascript
+" JS syntax highlighting
+Plugin 'jelera/vim-javascript-syntax'
+" JS indending
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+
+" XXX Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
+"       , and then :PluginInstall
+"       To remove, just remove line, and then :PluginUpdate and :PluginClean
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+""" ========================================================
+""" NERDTree
+" open a file in new tab.
+"let NERDTreeMapOpenInTab='<ENTER>'
+" open a NERDTree automatically when vim starts up.
+"autocmd VimEnter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+" open a NERDTree automatically when vim starts up if no files were specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" open NERDTree automatically when vim starts up on opening a directory
+autocmd VimEnter * 
+	\ if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | 
+	\   exe 'NERDTree' argv()[0] | 
+	\   wincmd p | 
+	\   ene | 
+	\ endif
+
+""" ========================================================
+""" Auto-complete 설정
+"" YouCompleteMe 설정
+"" https://github.com/Valloric/YouCompleteMe
+"let g:ycm_autoclose_preview_window_after_completion=1
+" look up the symbol under the cursor and jumps to its definition.
+" hit CTRL+o to bring back to where you started.
+"nnoremap <leader>gd  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" find all of the references within the project to the identifier under the
+" cursor and populates the quickfix list with those locations.
+" hit CTRL+o to bring back to where you started.
+"nnoremap <leader>gr  :YcmCompleter GoToReferences<CR>
+
+""" ========================================================
+""" Color Schemes 설정
+if has('gui_running')
+	set background=dark
+	colorscheme solarized
+else
+	colorscheme zenburn
+endif
+" switch between a dark and light theme of solarized.
+"call togglebg#map("<F5>")
+
+""" ========================================================
+""" Mapping keys
+"" Control windows
+if !exists("disable_vim_window_cmds") || disable_vim_window_cmds == 0
+	""" Moving cursor to other windows
+	" split navigation: go up. CTRL-W_CTRL-J, CTRL-W_j
+	"nmap <C-X>j <C-w>j
+	nnoremap <C-J> <C-W><C-J>
+	" split navigation: go down. CTRL-W_CTRL-K, CTRL-W_k
+	"nmap <C-X>k <C-w>k
+	nnoremap <C-K> <C-W><C-K>
+	" split navigation: go right. CTRL-W_CTRL-L, CTRL-W_l
+	"nmap <C-X>l <C-w>l
+	nnoremap <C-L> <C-W><C-L>
+	" split navigation: go left. CTRL-W_CTRL-H, CTRL-W_h
+	"nmap <C-X>h <C-w>h
+	nnoremap <C-H> <C-W><C-H>
+
+	""" Opening and closing a window
+	" split vertically. :vs, :vsplit
+	"nmap <C-X>3 <C-w>v
+	" split horizontally. :sp, :split
+	"nmap <C-X>2 <C-w>s
+	" close all other windows. :on, :only
+	"nmap <C-X>1 <C-w>o
+	" close current window. :clo, :close
+	"nmap <C-X>1 <C-w>c
+
+	""" Window resizing
+	" increase current window height.
+	map <F9> <C-W>+
+	" decrease current window height.
+	map <F10> <C-W>-
+	" make all windows equally high and wide.
+	map <F11> <C-W>=
+	" set current window height to highest possible.
+	map <F12> <C-W>_
+	" move cursor to window below/right. CTRL-W_w, CTRL-W_CTRL-W
+	"nmap <F6> <C-w><C-w>
+	" move cursor to window below/right in same buffer.
+	"nmap <buffer> <F6> <C-w><C-w>
+endif
+"" Moving tab pages
+"" http://vim.wikia.com/wiki/Using_tab_pages
+if !exists("disable_vim_tab_pages_traversal") || disable_vim_tab_pages_traversal == 0
+	" go to next tab
+	nmap <C-T><C-T> :tabnext<CR>
+	" go to previous tab
+	nmap <C-T>p :tabprevious<CR>
+endif
+"" Moving buffer traversal
+if !exists("disable_vim_buffer_traversal") || disable_vim_buffer_traversal == 0
+	" show all buffers. :buffers, :ls
+	nmap <leader>, :ls<CR>:e #
+	" go to next buffer in list. :bn, :bnext
+	nmap <leader>n :bnext<CR>
+	" go to previous buffer in list. :bp, :bprevious
+	nmap <leader>p :bprev<CR>
+	" search and split for {file} in 'path'. :sf, :sfind
+	nmap <leader>f :sf<SPACE>
+endif
+
+""" ========================================================
+""" 추가 vimrc 로딩.
+" python 설정
+"au FileType python so $HOME/yp_vimrc/yp_vimrc_py
+if filereadable($HOME . "/yp_vimrc/yp_vimrc_py")
+	so $HOME/yp_vimrc/yp_vimrc_py
+endif
+" c 설정
+if filereadable($HOME . "/yp_vimrc/yp_vimrc_c")
+	so $HOME/yp_vimrc/yp_vimrc_c
+endif
+" web language 설정
+if filereadable($HOME . "/yp_vimrc/yp_vimrc_web")
+	so $HOME/yp_vimrc/yp_vimrc_web
+endif
+" golang 설정
+if filereadable($HOME . "/yp_vimrc/yp_vimrc_go")
+	so $HOME/yp_vimrc/yp_vimrc_go
+endif
+" Ethereum solidity 설정
+if filereadable($HOME . "/yp_vimrc/yp_vimrc_sol")
+	so $HOME/yp_vimrc/yp_vimrc_sol
+endif

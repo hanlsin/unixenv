@@ -1,0 +1,36 @@
+""" Yun Woo Park (hanlsin@gmail.com) 12/13/2016
+""" vim configuration for Golang.
+
+""" Indentation
+au BufNewFile,BufRead *.go
+    \ set softtabstop=0 |
+    \ set noexpandtab
+
+""" Flagging unnecessary whitespace
+" use the below highlight group when displaying bad whitespace is desired.
+highlight BadWhitespace ctermbg=red guibg=red
+" display whitespaces at the beginning of a line in Golang mode as bad.
+au BufRead,BufNewFile *.go match BadWhitespace /^\s\+/
+" make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.go match BadWhitespace /\s\+$/
+
+"" Running go in vim
+" :help go-vim
+" :GoRun
+au FileType go nmap <leader>r <Plug>(go-run)
+" :GoBuild
+au FileType go nmap <leader>b <Plug>(go-build)
+" :GoTest
+au FileType go nmap <leader>t <Plug>(go-test)
+" :GoCoverage
+au FileType go nmap <leader>c <Plug>(go-coverage)
+" GoDef
+au FileType go nmap <leader>dd <Plug>(go-def)
+au FileType go nmap <leader>ds <Plug>(go-def-split)
+au FileType go nmap <leader>dv <Plug>(go-def-vertical)
+" GoCallees
+au FileType go nmap <leader>ce <Plug>(go-callees)
+" GoCallers
+au FileType go nmap <leader>cr <Plug>(go-callers)
+" GoReferrers
+au FileType go nmap <leader>rf <Plug>(go-referrers)

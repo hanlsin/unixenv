@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# @brief  Set environment for Robot Operating System (ROS).
+#         http://www.ros.org/
+#
+# @author   Yun Woo Park
+
+# to initialize the ROS environment
+function fn_ros_init()
+{
+	ros_setup_bash=/opt/ros/kinetic/setup.bash
+	if [ -e "$ros_setup_bash" ]
+	then
+		source $ros_setup_bash
+	else
+		ros_setup_bash=/opt/ros/indigo/setup.bash
+		if [ -e "$ros_setup_bash" ]
+		then
+			source $ros_setup_bash
+		else
+			echo "ERROR: Cannot find ROS setup.bash."
+			return
+		fi
+	fi
+	printenv | grep ROS_
+}

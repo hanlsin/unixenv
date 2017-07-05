@@ -1,0 +1,73 @@
+""" Yun Woo Park (hanlsin@gmail.com) 12/13/2016
+""" vim configuration for Python.
+""" https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
+
+""" Indentation
+au BufRead,BufNewFile *.py,*.pyw
+            \ set tabstop=4 |
+            \ set shiftwidth=4 |
+            \ set expandtab |
+            \ set textwidth=79 |
+            \ set fileformat=unix
+au FileType python set softtabstop=4
+au FileType python set autoindent
+
+""" SimpylFold 설정
+" enable previewing of your folded classes' and functions'
+let g:SimpylFold_docstring_preview=1
+" In order for SimpylFold to be properly loaded in certain cases (issue #27)
+autocmd FileType python setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd FileType python setlocal foldexpr< foldmethod<
+
+""" Flagging unnecessary whitespace
+" use the below highlight group when displaying bad whitespace is desired.
+highlight BadWhitespace ctermbg=red guibg=red
+" display tabs at the beginning of a line in Python mode as bad.
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+" make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
+
+""" Virtualenv support
+" This determines if you are running inside a virtualenv, and then switches to
+" that specific virtualenv and sets up your system path so that YouCompleteMe
+" will find the appropriate site packages.
+if has("python")
+	py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+	project_base_dir = os.environ['VIRTUAL_ENV']
+	activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+	execfile(activate_this, dict(__file__=activate_this))
+EOF
+elseif has("python3")
+	py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+	project_base_dir = os.environ['VIRTUAL_ENV']
+	activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+	execfile(activate_this, dict(__file__=activate_this))
+EOF
+endif
+
+""" Syntax Checking/Highlighting
+let python_highlight_all=1
+
+"" File Browsing
+" hide '.pyc' files in NERDTree.
+let NERDTreeIgnore=['\.pyc$', '\~$']
+
+"" Running python in vim
+" http://vim.wikia.com/wiki/Python_-_check_syntax_and_run_script
+" ':make' to get the syntax errors.
+autocmd BufRead *.py set makeprg=python3\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+" ':cnext' to move to next error.
+autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+" <F5> to execute the current script.
+"autocmd BufRead *.py nmap <F5> :!python3 %<CR>
+" '<leader>r to execute the current script.
+autocmd BufRead,BufNewFile *.py nmap <leader>r :wa<CR>:!clear<CR>:!python3 %<CR>
+" <F6> to execute scripts in buffer.
+autocmd FileType python nnoremap <buffer> <F6> :exec '!python3' shellescape(@%, 1)<CR>
+
