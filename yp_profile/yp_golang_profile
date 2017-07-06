@@ -26,9 +26,151 @@ export _YPGO_ORIGINAL_GOPATH=$GOPATH
 # This step is not required for Go 1.6.
 #export GO15VENDOREXPERIMENT=1
 
+# to set go environment
+function fn_go_initenv ()
+{
+	if [ ! -z $1 ] && [ "__GOTO_DEFAULT__" = $1 ]
+	then
+		# recover original variables
+		export GOPATH=$_YPGO_ORIGINAL_GOPATH
+		export PATH=$_YPGO_ORIGINAL_PATH
+		export CDPATH=$_YPGO_ORIGINAL_CDPATH
+
+		return
+	elif [ -z $1 ] || [ ! -d $1 ]
+	then
+		echo "ERROR: $1 is not exist or not a  directory: ${FUNCNAME[0]} [<dir>]"
+
+		return
+	fi
+
+	GOPATH=$_YPGO_ORIGINAL_GOPATH
+	PATH=$_YPGO_ORIGINAL_PATH
+	CDPATH=$_YPGO_ORIGINAL_CDPATH
+
+	work_path=$1
+
+	export GOPATH=$work_path/go
+	export PATH=$GOPATH/bin:$PATH
+	#export CDPATH=$GOPATH/src/github.com:$work_path:$CDPATH
+
+	cd $work_path
+
+	alias home='cd $work_path'
+	alias gopath='cd $GOPATH'
+	alias github='cd $GOPATH/src/github.com'
+
+	fn_go_checktools
+}
+
 # to check tools to develop
 function fn_go_checktools ()
 {
+if [ "${BASH_VERSINFO}" -eq 3 ]; then
+	printf "Golang tool: \033[1;31m%s\033[0m" "dlv"
+	if [ ! -f "$GOPATH/bin/dlv" ]; then
+		go get -u github.com/derekparker/delve/cmd/dlv
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "glide"
+	if [ ! -f "$GOPATH/bin/glide" ]; then
+		go get -u github.com/Masterminds/glide
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "gocode"
+	if [ ! -f "$GOPATH/bin/gocode" ]; then
+		go get -u github.com/nsf/gocode
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "godef"
+	if [ ! -f "$GOPATH/bin/godef" ]; then
+		go get -u github.com/rogpeppe/godef
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "golint"
+	if [ ! -f "$GOPATH/bin/golint" ]; then
+		go get -u github.com/golang/lint/golint
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "gomodifytags"
+	if [ ! -f "$GOPATH/bin/gomodifytags" ]; then
+		go get -u github.com/fatih/gomodifytags
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "go-outline"
+	if [ ! -f "$GOPATH/bin/go-outline" ]; then
+		go get -u github.com/lukehoban/go-outline
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "gopkgs"
+	if [ ! -f "$GOPATH/bin/gopkgs" ]; then
+		go get -u github.com/tpng/gopkgs
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "gorename"
+	if [ ! -f "$GOPATH/bin/gorename" ]; then
+		go get -u golang.org/x/tools/cmd/gorename
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "goreturns"
+	if [ ! -f "$GOPATH/bin/goreturns" ]; then
+		go get -u sourcegraph.com/sqs/goreturns
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "go-symbols"
+	if [ ! -f "$GOPATH/bin/go-symbols" ]; then
+		go get -u github.com/newhook/go-symbols
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "guru"
+	if [ ! -f "$GOPATH/bin/guru" ]; then
+		go get -u golang.org/x/tools/cmd/guru
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+
+	printf "Golang tool: \033[1;31m%s\033[0m" "gotests"
+	if [ ! -f "$GOPATH/bin/gotests" ]; then
+		go get -u github.com/cweill/gotests/...
+		printf " ... INSTALLED\n"
+	else
+		printf " ... DONE\n"
+	fi
+else
 	declare -A tools=(
 		["dlv"]='cmds=("go get -u github.com/derekparker/delve/cmd/dlv")'
 		["glide"]='cmds=("go get -u github.com/Masterminds/glide")'
@@ -76,41 +218,5 @@ function fn_go_checktools ()
 			fi
 		done
 	done
-}
-
-# to set go environment
-function fn_go_initenv ()
-{
-	if [ ! -z $1 ] && [ "__GOTO_DEFAULT__" = $1 ]
-	then
-		# recover original variables
-		export GOPATH=$_YPGO_ORIGINAL_GOPATH
-		export PATH=$_YPGO_ORIGINAL_PATH
-		export CDPATH=$_YPGO_ORIGINAL_CDPATH
-
-		return
-	elif [ -z $1 ] || [ ! -d $1 ]
-	then
-		echo "ERROR: Need argument: ${FUNCNAME[0]} [<dir>]"
-
-		return
-	fi
-
-	GOPATH=$_YPGO_ORIGINAL_GOPATH
-	PATH=$_YPGO_ORIGINAL_PATH
-	CDPATH=$_YPGO_ORIGINAL_CDPATH
-
-	work_path=$1
-
-	export GOPATH=$work_path/go
-	export PATH=$GOPATH/bin:$PATH
-	#export CDPATH=$GOPATH/src/github.com:$work_path:$CDPATH
-
-	cd $work_path
-
-	alias home='cd $work_path'
-	alias gopath='cd $GOPATH'
-	alias github='cd $GOPATH/src/github.com'
-
-	fn_go_checktools
+fi
 }

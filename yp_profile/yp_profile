@@ -8,11 +8,36 @@
 # Default environment
 ####
 
+# check OS
+os=`uname`
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	echo $os
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	# Mac OSX
+	echo $os
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+	# POSIX compatibility layer and Linux environment emulation for Windows
+	echo $os
+elif [[ "$OSTYPE" == "msys" ]]; then
+	# Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+	echo $os
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+	# FreeBSD
+	echo $os
+else
+	# Unknown.
+	echo $os
+fi
+
 # check environment variable HOME exist
 if env | grep -q ^HOME=
 then
 	uname=`whoami`
-	export HOME=/home/$uname
+	if [[ "$OSTYPE" == "linux-gnu" ]]; then
+		export HOME=/home/$uname
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		export HOME=/Users/$uname
+	fi
 fi
 
 
@@ -79,8 +104,15 @@ alias tk='tmux kill-session -t '
 # for 'ls' command
 #export CLICOLOR=1
 #export LSCOLORS=
-alias ls='ls --color=auto'
-alias ll='ls --color=auto -al'
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	alias ls='ls --color=auto'
+	alias ll='ls --color=auto -al'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	alias ls='ls -G'
+	alias ll='ls -G -al'
+else
+	alias ll='ls -G -al'
+fi
 
 # for virtualenv
 #alias vp2='fn_py_virtualenv -p p2 -d ~/virtualenv -n'
@@ -89,7 +121,7 @@ alias vp3='fn_py_virtualenv -p p3 -d ~/virtualenv -n vp3'
 alias va3='fn_py_virtualenv -p a3 -d ~/virtualenv -n va3'
 
 # shortcut for 'yp' working directory and set golang and ros
-alias ypgo='fn_go_initenv /DATA/work/yp'
+alias ypgo='fn_go_initenv ~/work/yp'
 alias ypros='fn_ros_init'
 
 # restore default go enviroement
