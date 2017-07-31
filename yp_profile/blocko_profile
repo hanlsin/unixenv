@@ -4,7 +4,7 @@
 #
 # @author   Yun Woo Park
 
-blocko_home='/DATA/work/blocko'
+blocko_home='~/work/blocko'
 
 # shortcut for 'blocko' working directory
 alias blocko='fn_go_initenv $blocko_home'

@@ -131,10 +131,10 @@ alias esc='fn_go_initenv __GOTO_DEFAULT__'
 alias catkin='fn_automato_goros;cd ~/work/yp/ros/catkin_ws;source devel/setup.bash;echo $ROS_PACKAGE_PATH'
 
 # study Self-Driving Car
-alias study='cd /DATA/private/study'
+alias study='cd ~/study'
 
 # AuTomato
-alias automato='cd /DATA/work/automato'
+alias automato='cd ~/work/automato'
 
 
 ###############################################################################
