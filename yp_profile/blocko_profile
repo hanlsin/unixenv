@@ -4,12 +4,12 @@
 #
 # @author   Yun Woo Park
 
-blocko_home='~/work/blocko'
+BLOCKO_HOME='~/work/blocko'
 
 # shortcut for 'blocko' working directory
-alias blocko='fn_go_initenv $blocko_home'
+alias blocko='fn_go_initenv $BLOCKO_HOME'
 
 # shortcut for 'projects'
-alias oec='fn_go_initenv $blocko_home/projects/oec'
-alias bbr='fn_go_initenv $blocko_home/projects/bbr'
-alias mini='fn_go_initenv $blocko_home/projects/fabric_minions'
+alias oec='fn_go_initenv $BLOCKO_HOME/projects/oec'
+alias bbr='fn_go_initenv $BLOCKO_HOME/projects/bbr'
+alias mini='fn_go_initenv $BLOCKO_HOME/projects/fabric_minions'
