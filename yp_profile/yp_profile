@@ -15,6 +15,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	# Mac OSX
 	echo $os
+	export CLICOLOR=1
+	export LSCOLORS=GxFxCxDxBxegedabagaced
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 	# POSIX compatibility layer and Linux environment emulation for Windows
 	echo $os
@@ -49,7 +51,7 @@ fi
 if [ -f ~/yp_profile/yp_prompt_profile ]; then
     . ~/yp_profile/yp_prompt_profile
 fi
-#fn_fancy_prompt
+fn_fancy_prompt
 
 # compound commands profile
 if [ -f ~/yp_profile/yp_command_profile ]; then
