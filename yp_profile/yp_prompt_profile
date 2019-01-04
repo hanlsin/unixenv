@@ -5,20 +5,21 @@
 # @author   Yun Woo Park
 
 #
-# export PROMPT_COLOR1 as you wish
+# export PROMPT_COLOR as you wish
 # 29-white, 30-black, 31-red, 32-green, 33-yellow, 34-pupple, 35-pink, 36-sky
 #
 function fn_fancy_prompt ()
 {
-	export PROMPT_COLOR1=${PROMPT_COLOR1:-33}
-	export PROMPT_COLOR2=${PROMPT_COLOR2:-34}
+	export PROMPT_COLOR1=35
+	export PROMPT_COLOR2=33
+	export PROMPT_COLOR3=32
 
 	case "$TERM" in
 		xterm-*color) 
-			PS1='\[\033[01;${PROMPT_COLOR1}m\]\u@\h\[\033[00m\]:\[\033[01;${PROMPT_COLOR2}m\]\w\$ \[\033[00m\]'
+			PS1='\[\033[01;${PROMPT_COLOR1}m\]\u@\h\[\033[00m\]:\[\033[01;${PROMPT_COLOR2}m\]\w\[\033[00m\]\[\033[01;${PROMPT_COLOR3}m\]$(fn_git_branch)\[\033[00m\]\n$ '
 			;;  
 		screen-*color)
-			PS1='\[\033[01;${PROMPT_COLOR1}m\]\u@\h\[\033[00m\]:\[\033[01;${PROMPT_COLOR2}m\]\w\$ \[\033[00m\]'
+			PS1='\[\033[01;${PROMPT_COLOR1}m\]\u@\h\[\033[00m\]:\[\033[01;${PROMPT_COLOR2}m\]\w\[\033[00m\]\[\033[01;${PROMPT_COLOR3}m\]$(fn_git_branch)\[\033[00m\]\n$ '
 			;;  
 		*)  
 			PS1='\u@\h:\w\$ '
@@ -69,4 +70,9 @@ function fn_custom_prompt ()
 			PS1='\u@\h:\w\$ '
 			;;  
 	esac
+}
+
+function fn_git_branch()
+{
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }

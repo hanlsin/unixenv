@@ -48,6 +48,20 @@ nnoremap <space> za
 autocmd BufReadPost * if line("'\"") && line("'\"") <= line("$") | exe "normal `\"" | endif
 
 """ ========================================================
+""" vim buffer
+"""  - :e : open new buffer
+"""  - :b <number> : go to the number buffer
+"""  - :bd : close buffer
+"" open new buffer
+"nnoremap <C-S-t> :enew<Enter>
+"" move to previous buffer
+"nnoremap <C-F5> :bprevious!<Enter>
+"" move to next buffer
+"nnoremap <C-F6> :bnext!<Enter>
+"" close buffer and move previous
+"nnoremap <C-F4> :bp <BAR> bd #<Enter>
+
+""" ========================================================
 """ Vundle 설정
 """ https://github.com/VundleVim/Vundle.vim
 """ at first: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -119,6 +133,10 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'nathanaelkane/vim-indent-guides'
 
+" vim-airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " XXX Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 "       , and then :PluginInstall
 "       To remove, just remove line, and then :PluginUpdate and :PluginClean
@@ -126,6 +144,19 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+""" ========================================================
+""" vim-airline
+" turn on buffer list
+let g:airline#extensions#tabline#enabled = 1
+" 파일명만 출력
+let g:airline#extensions#tabline#fnamemod = ':t'
+" show buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 1
+" buffer number format
+let g:airline#extensions#tabline#buffer_nr_format = '%s:'
+let g:airline_theme='tomorrow'
+set laststatus=2 " turn on bottom bar
 
 """ ========================================================
 """ NERDTree
@@ -227,7 +258,7 @@ if !exists("disable_vim_buffer_traversal") || disable_vim_buffer_traversal == 0
 	" go to previous buffer in list. :bp, :bprevious
 	nmap <leader>p :bprev<CR>
 	" search and split for {file} in 'path'. :sf, :sfind
-	nmap <leader>f :sf<SPACE>
+	"nmap <leader>f :sf<SPACE>
 endif
 
 """ ========================================================
@@ -252,4 +283,8 @@ endif
 " Ethereum solidity 설정
 if filereadable($HOME . "/yp_vimrc/yp_vimrc_sol")
 	so $HOME/yp_vimrc/yp_vimrc_sol
+endif
+" yaml 설정
+if filereadable($HOME . "/yp_vimrc/yp_vimrc_yaml")
+	so $HOME/yp_vimrc/yp_vimrc_yaml
 endif

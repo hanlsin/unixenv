@@ -1,0 +1,11 @@
+""" Yun Woo Park (hanlsin@gmail.com) 12/13/2016
+""" vim configuration for Golang.
+
+""" Indentation
+au BufNewFile,BufRead *.yaml
+	\ set nu            |
+    \ set tabstop=2     |
+    \ set shiftwidth=2  |
+    \ set softtabstop=2 |
+    \ set expandtab
+

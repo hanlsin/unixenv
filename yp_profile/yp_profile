@@ -94,9 +94,6 @@ fi
 # Additional Settings
 ####
 
-# direct ssh
-alias gomac='ssh "Yun Woo Park"@yun-macbookair.local'
-
 # TMUX 관련 alias
 alias tm='tmux'
 alias tl='tmux ls'
@@ -118,31 +115,22 @@ fi
 
 # for virtualenv
 #alias vp2='fn_py_virtualenv -p p2 -d ~/virtualenv -n'
-alias vp3='fn_py_virtualenv -p p3 -d ~/virtualenv -n vp3'
+#alias vp3='fn_py_virtualenv -p p3 -d ~/virtualenv -n vp3'
 #alias va2='fn_py_virtualenv -p a2 -d ~/virtualenv -n'
-alias va3='fn_py_virtualenv -p a3 -d ~/virtualenv -n va3'
+#alias va3='fn_py_virtualenv -p a3 -d ~/virtualenv -n va3'
 
 # shortcut for 'yp' working directory and set golang and ros
-alias ypgo='fn_go_initenv ~/work/yp'
-alias ypros='fn_ros_init'
+#alias ypgo='fn_go_initenv ~/work/yp'
+#alias ypros='fn_ros_init'
 
 # restore default go enviroement
-alias esc='fn_go_initenv __GOTO_DEFAULT__'
-
-# shortcut for catkin of ROS working space
-alias catkin='fn_automato_goros;cd ~/work/yp/ros/catkin_ws;source devel/setup.bash;echo $ROS_PACKAGE_PATH'
-
-# study Self-Driving Car
-alias study='cd ~/study'
-
-# AuTomato
-alias automato='cd ~/work/automato'
+#alias esc='fn_go_initenv __GOTO_DEFAULT__'
 
 
 ###############################################################################
 # Startup Commands
 ####
-ypgo
+#ypgo
 
 
 ###############################################################################

@@ -58,6 +58,7 @@ function fn_go_initenv ()
 
 	alias home='cd $work_path'
 	alias gopath='cd $GOPATH'
+	alias gosrc='cd $GOPATH/src'
 	alias github='cd $GOPATH/src/github.com'
 
 	fn_go_checktools
@@ -66,111 +67,10 @@ function fn_go_initenv ()
 # to check tools to develop
 function fn_go_checktools ()
 {
-if [ "${BASH_VERSINFO}" -eq 3 ]; then
-	printf "Golang tool: \033[1;31m%s\033[0m" "dlv"
-	if [ ! -f "$GOPATH/bin/dlv" ]; then
-		go get -u github.com/derekparker/delve/cmd/dlv
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
+	line='-------------------------'
 
-	printf "Golang tool: \033[1;31m%s\033[0m" "glide"
-	if [ ! -f "$GOPATH/bin/glide" ]; then
-		go get -u github.com/Masterminds/glide
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "gocode"
-	if [ ! -f "$GOPATH/bin/gocode" ]; then
-		go get -u github.com/nsf/gocode
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "godef"
-	if [ ! -f "$GOPATH/bin/godef" ]; then
-		go get -u github.com/rogpeppe/godef
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "golint"
-	if [ ! -f "$GOPATH/bin/golint" ]; then
-		go get -u github.com/golang/lint/golint
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "gomodifytags"
-	if [ ! -f "$GOPATH/bin/gomodifytags" ]; then
-		go get -u github.com/fatih/gomodifytags
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "go-outline"
-	if [ ! -f "$GOPATH/bin/go-outline" ]; then
-		go get -u github.com/lukehoban/go-outline
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "gopkgs"
-	if [ ! -f "$GOPATH/bin/gopkgs" ]; then
-		go get -u github.com/tpng/gopkgs
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "gorename"
-	if [ ! -f "$GOPATH/bin/gorename" ]; then
-		go get -u golang.org/x/tools/cmd/gorename
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "goreturns"
-	if [ ! -f "$GOPATH/bin/goreturns" ]; then
-		go get -u sourcegraph.com/sqs/goreturns
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "go-symbols"
-	if [ ! -f "$GOPATH/bin/go-symbols" ]; then
-		go get -u github.com/newhook/go-symbols
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "guru"
-	if [ ! -f "$GOPATH/bin/guru" ]; then
-		go get -u golang.org/x/tools/cmd/guru
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-
-	printf "Golang tool: \033[1;31m%s\033[0m" "gotests"
-	if [ ! -f "$GOPATH/bin/gotests" ]; then
-		go get -u github.com/cweill/gotests/...
-		printf " ... INSTALLED\n"
-	else
-		printf " ... DONE\n"
-	fi
-else
+# bash version 4
+if [ "${BASH_VERSINFO}" -ge 4 ]; then
 	declare -A tools=(
 		["dlv"]='cmds=("go get -u github.com/derekparker/delve/cmd/dlv")'
 		["glide"]='cmds=("go get -u github.com/Masterminds/glide")'
@@ -185,21 +85,20 @@ else
 		["go-symbols"]='cmds=("go get -u github.com/newhook/go-symbols")'
 		["guru"]='cmds=("go get -u golang.org/x/tools/cmd/guru")'
 		["gotests"]='cmds=("go get -u github.com/cweill/gotests/...")'
+		["protoc-gen-go"]='cmds=("go get -u github.com/golang/protobuf/protoc-gen-go")'
+		["dep"]='cmds=("go get -u github.com/golang/dep/cmd/dep")'
 	)
 
 	for tool_name in "${!tools[@]}"
 	do
-		line='-------------------------'
+		printf "Golang tool: \033[1;31m%s\033[0m %s " $tool_name "${line:${#tool_name}}"
 
 		file=$GOPATH/bin/$tool_name
-		if [ -f "$file" ]
+		if [ -f "$file" ] && [ "-f" != $1 ]
 		then
-			#echo "	'$file' is found."
-			printf "Golang tool: \033[1;31m%s\033[0m %s [OK]\n" $tool_name "${line:${#tool_name}}"
+			printf "[ OK ]\n"
 			continue
 		fi
-
-		printf "Golang tool: Installing \033[1;31m$tool_name\033[0m ...\n"
 
 		eval ${tools[$tool_name]}
 
@@ -209,14 +108,54 @@ else
 			cmd=${cmds[$i]}
 			if eval $cmd
 			then
+				printf "[ \033[1;34mINSTALLED\033[0m ]\n"
 				i=$(($i + 1))
-				echo "    '$file' is installed."
 			else
-				#echo "Fail to install $tool_name: $cmd"
-				printf "Golang tool: \033[1;31m%s\033[0m %s [FAIL]\n" $tool_name "${line:${#tool_name}}"
+				printf "[ \033[1;31mFAIL\033[0m ]\n"
 				return
 			fi
 		done
 	done
+else
+	tools=(
+		"dlv::go get -u github.com/derekparker/delve/cmd/dlv"
+		"glide::go get -u github.com/Masterminds/glide"
+		"gocode::go get -u github.com/nsf/gocode"
+		"godef::go get -u github.com/rogpeppe/godef"
+		"golint::go get -u github.com/golang/lint/golint"
+		"gomodifytags::go get -u github.com/fatih/gomodifytags"
+		"go-outline::go get -u github.com/lukehoban/go-outline"
+		"gopkgs::go get -u github.com/tpng/gopkgs"
+		"gorename::go get -u golang.org/x/tools/cmd/gorename"
+		"goreturns::go get -u sourcegraph.com/sqs/goreturns"
+		"go-symbols::go get -u github.com/newhook/go-symbols"
+		"guru::go get -u golang.org/x/tools/cmd/guru"
+		"gotests::go get -u github.com/cweill/gotests/..."
+		"protoc-gen-go::go get -u github.com/golang/protobuf/protoc-gen-go"
+		"dep::go get -u github.com/golang/dep/cmd/dep"
+	)
+
+	for idx in "${tools[@]}"; do
+		tool_name=${idx%%::*} 
+		tool_cmd="${idx##*::}"
+
+		printf "Golang tool: \033[1;32m%s\033[0m %s " $tool_name "${line:${#tool_name}}"
+
+		file=$GOPATH/bin/$tool_name
+		if [ ! -f "$file" ] || [ "-f" = $1 ]
+		then
+			if eval "${idx##*::}"
+			then
+				printf "[ \033[1;34mINSTALLED\033[0m ]\n"
+			else
+				printf "[ \033[1;31mFAIL\033[0m ]\n"
+				return
+			fi
+		else
+			printf "[ OK ]\n"
+		fi
+	done
 fi
 }
+
+alias gocheck="fn_go_checktools -f"
