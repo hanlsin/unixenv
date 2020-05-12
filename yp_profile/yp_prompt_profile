@@ -10,9 +10,9 @@
 #
 function fn_fancy_prompt ()
 {
-	export PROMPT_COLOR1=35
-	export PROMPT_COLOR2=33
-	export PROMPT_COLOR3=32
+	export PROMPT_COLOR1=36
+	export PROMPT_COLOR2=32
+	export PROMPT_COLOR3=35
 
 	case "$TERM" in
 		xterm-*color) 

@@ -1,0 +1,10 @@
+""" Yun Woo Park (hanlsin@gmail.com) 12/13/2016
+""" vim configuration for Python.
+
+""" Indentation
+au BufRead,BufNewFile *.md
+            \ set tabstop=4 |
+	    \ set softtabstop=4 |
+            \ set shiftwidth=4 |
+            \ set expandtab |
+            \ set fileformat=unix

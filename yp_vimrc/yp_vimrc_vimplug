@@ -1,0 +1,78 @@
+""" Yun Woo Park (hanlsin@gmail.com) 1/12/2017
+
+" vi 오리지널과 호환하는 모드를 사용하지 않음
+set nocompatible    " required
+" 파일의 종류를 자동으로 인식하지 않음
+filetype off        " required
+
+""" ========================================================
+""" vim-plug 설정 시작
+""" https://github.com/junegunn/vim-plug
+""" at first: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/vimplug')
+" alternatively, pass a path where vim-plug should install plugins
+"call plug#begin('~/some/path/here')
+
+" Make sure you use single quotes
+
+" Any valid git URL is allowed
+"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" Multiple Plug commands can be written in a single line using | separators
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" On-demand loading
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+"Plug '~/my-prototype-plugin'
+
+" python mode
+" https://github.com/python-mode/python-mode
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+
+" ZENBURN 
+" http://kippura.org/zenburnpage/
+" https://github.com/jnurmine/Zenburn
+" https://vimawesome.com/plugin/zenburn
+Plug 'https://github.com/jnurmine/Zenburn', { 'colorscheme': 'zenburn' }
+
+" vim-go
+" https://github.com/fatih/vim-go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" fugitive.vim
+" https://github.com/tpope/vim-fugitive
+Plug 'tpope/vim-fugitive'
+
+" Markdown
+" https://github.com/tpope/vim-markdown
+Plug 'tpope/vim-markdown'
+
+" XXX Add all your plugins here
+"       , and then :PlugInstall
+"       To remove, just remove line, and then :PlugUpdate and :PlugClean
+
+" All of your Plugins must be added before the following line
+call plug#end()              " required
+filetype plugin indent on    " required
+
+""" vim-plug 설정 끝
+""" ========================================================

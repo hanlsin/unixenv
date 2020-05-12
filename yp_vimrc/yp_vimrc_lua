@@ -1,0 +1,10 @@
+""" Yun Woo Park (hanlsin@gmail.com) 12/13/2016
+""" vim configuration for Lua.
+
+""" Indentation
+au BufRead,BufNewFile *.lua
+            \ set tabstop=2 |
+	    \ set softtabstop=2 |
+            \ set shiftwidth=2 |
+            \ set expandtab |
+            \ set fileformat=unix

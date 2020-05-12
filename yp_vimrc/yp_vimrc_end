@@ -1,0 +1,83 @@
+""" Yun Woo Park (hanlsin@gmail.com) 1/12/2017
+
+
+""" ========================================================
+""" Color Schemes 설정
+""" http://kippura.org/zenburnpage/
+""" https://github.com/jnurmine/Zenburn
+""" https://vimawesome.com/plugin/zenburn
+if has('gui_running')
+	set background=dark
+	colorscheme solarized
+else
+	colorscheme zenburn
+endif
+" switch between a dark and light theme of solarized.
+"call togglebg#map("<F5>")
+
+" Selection color
+highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
+
+
+""" ========================================================
+""" NERDTree
+""" https://github.com/preservim/nerdtree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+" open a file in new tab.
+"let NERDTreeMapOpenInTab='<ENTER>'
+" open a NERDTree automatically when vim starts up.
+"autocmd VimEnter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+" open a NERDTree automatically when vim starts up if no files were specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" open NERDTree automatically when vim starts up on opening a directory
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+
+""" ========================================================
+""" vim-fugitive
+""" https://github.com/tpope/vim-fugitive
+""" git plugins
+nnoremap <space>gst :Gstatus<CR>
+nnoremap <space>gd :Gdiff<CR>
+
+
+""" ========================================================
+""" vim-markdown
+""" https://github.com/tpope/vim-markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go']
+
+
+""" ========================================================
+""" vim-vue
+let g:vue_disable_pre_processors = 1
+
+
+""" ========================================================
+""" vim-airline
+" turn on buffer list
+let g:airline#extensions#tabline#enabled = 1
+" 파일명만 출력
+let g:airline#extensions#tabline#fnamemod = ':t'
+" show buffer number
+let g:airline#extensions#tabline#buffer_nr_show = 1
+" buffer number format
+let g:airline#extensions#tabline#buffer_nr_format = '%s:'
+let g:airline_theme='solarized'
+set laststatus=2 " turn on bottom bar
+
+
+""" ========================================================
+""" Auto-complete 설정
+"" YouCompleteMe 설정
+"" https://github.com/Valloric/YouCompleteMe
+"let g:ycm_autoclose_preview_window_after_completion=1
+" look up the symbol under the cursor and jumps to its definition.
+" hit CTRL+o to bring back to where you started.
+"nnoremap <leader>gd  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" find all of the references within the project to the identifier under the
+" cursor and populates the quickfix list with those locations.
+" hit CTRL+o to bring back to where you started.
+"nnoremap <leader>gr  :YcmCompleter GoToReferences<CR>
+

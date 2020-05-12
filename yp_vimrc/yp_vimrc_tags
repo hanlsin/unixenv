@@ -1,0 +1,35 @@
+""" Yun Woo Park (hanlsin@gmail.com) 2/18/2018
+
+set tags=~/tags,./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tag,./../../../../../../tags,./../../../../../../tag
+
+""" ========================================================
+""" cscope 설정
+""" ========================================================
+if has("cscope")
+    set csprg=/usr/local/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    if filereadable("./cscope.out")
+        cs add cscope.out
+    endif
+    set csverb
+
+    "nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    "nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    "nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+    "nmap <C-_><C-_>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+    "nmap <C-_><C-_>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+    "nmap <C-_><C-_>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    "nmap <C-_><C-_>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+endif
