@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# netcheck shortcut
+alias netcheck="lsof -i -P | grep -i listen"
+
+# llvm
+export PATH="`brew --prefix llvm`/bin:${PATH}"
+
+# vim
+VIM_PATH="`brew --prefix vim`"
+alias vi="$VIM_PATH/bin/vim"
+alias vim="vi"
+
+# ctags
+# REF: http://hochulshin.com/tool-vi-ctags-cscope-on-osx/
+alias ctags="`brew --prefix`/bin/ctags"
+
+# gitk
+alias gitk="gitk --all"
+
+# crudini
+# https://github.com/pixelb/crudini
+export CRUDINI_HOME=${YP_WORK}/bin/crudini-0.9.3
+export CRUDINI_PATH=${CRUDINI_HOME}
+export PATH=$PATH:$CRUDINI_PATH
+
+# for GIT
+alias ga="git add -p"
+
+# for Golang
+export GOPATH=${YP_WORK}/go
+alias gopath="cd ${GOPATH}/src"
+
+# check shell
+export WHICH_SH=`ps -p $$ -o command=`
+if [ "${WHICH_SH}" = "-zsh" ];
+then
+	export SHELL=/bin/zsh
+	echo "You are using ZSH"
+elif [ "${WHICH_SH}" = "-bash" ];
+then
+	echo "You are using BASH"
+fi
+
