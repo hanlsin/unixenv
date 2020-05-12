@@ -26,18 +26,79 @@ ln -s unixenv/yp_vimrc yp_vimrc
 ln -s unixenv/yp_env_vars yp_env_vars
 ln -s unixenv/.vimrc .vimrc
 ln -s unixenv/.bash_aliases .bash_aliases
+ln -s unixenv/.p10k.zsh .p10k.zsh
 ```
 
-### use  Bash on Tmux
+### Use Zsh
+
+#### Setup [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```bash
-ln -s unixenv/.tmux.bash.conf .tmux.conf
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-#### use Zsh on Tmux
+##### plugins
+
+```bash
+vi ~/.zshrc
+```
+
+Find `plugins` and input the below in the `.zshrc` file.
+
+```
+plugins=(
+    git
+    pipenv
+    virtualenv
+)
+```
+
+#### Setup [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+
+```bash
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+Find `ZSH_THEME` and input the below in the `.zshrc` file.
+
+```
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+```
+
+Input the below in the `.zshrc` file.
+
+```
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+```
+
+#### Setup personal envs
+
+```bash
+vi ~/.zshrc
+```
+
+Input the below in the `.zshrc` file.
+
+```
+if [ -f ~/yp_env_vars ]; then
+    . ~/yp_env_vars
+fi
+```
+
+#### Use Zsh on Tmux
 
 ```bash
 ln -s unixenv/.tmux.zsh.conf .tmux.conf
+```
+
+### Use Bash
+
+#### Use Bash on Tmux
+
+```bash
+ln -s unixenv/.tmux.bash.conf .tmux.conf
 ```
 
 ## Prepare and Setup Vim
@@ -76,5 +137,13 @@ brew install vim
 
 ```bash
 sudo apt install vim
+```
+
+## Prepare and Setup Tmux
+
+### Prepare [Tmux Plugin Manager (tpm)](https://github.com/tmux-plugins/tpm)
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
