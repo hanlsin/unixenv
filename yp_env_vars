@@ -3,17 +3,8 @@
 # netcheck shortcut
 alias netcheck="lsof -i -P | grep -i listen"
 
-# llvm
-export PATH="`brew --prefix llvm`/bin:${PATH}"
-
 # vim
-VIM_PATH="`brew --prefix vim`"
-alias vi="$VIM_PATH/bin/vim"
 alias vim="vi"
-
-# ctags
-# REF: http://hochulshin.com/tool-vi-ctags-cscope-on-osx/
-alias ctags="`brew --prefix`/bin/ctags"
 
 # gitk
 alias gitk="gitk --all"
