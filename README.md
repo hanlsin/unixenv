@@ -23,6 +23,7 @@ git clone git@github.com:hanlsin/unixenv.git
 ```bash
 ln -s unixenv/yp_profile yp_profile
 ln -s unixenv/yp_vimrc yp_vimrc
+ln -s unixenv/yp_env_vars yp_env_vars
 ln -s unixenv/.vimrc .vimrc
 ln -s unixenv/.bash_aliases .bash_aliases
 ```
