@@ -14,19 +14,18 @@ This is a repository to store YP's common enviroment files for unix-like OS.
 ### Clone the repository
 
 ```bash
-cd ~
-git clone git@github.com:hanlsin/unixenv.git
+git clone git@github.com:hanlsin/unixenv.git ~/.unixenv
 ```
 
 ### Create symbolic links
 
 ```bash
-ln -s unixenv/yp_profile yp_profile
-ln -s unixenv/yp_vimrc yp_vimrc
-ln -s unixenv/yp_env_vars yp_env_vars
-ln -s unixenv/.vimrc .vimrc
-ln -s unixenv/.bash_aliases .bash_aliases
-ln -s unixenv/.p10k.zsh .p10k.zsh
+ln -s ~/.unixenv/yp_profile yp_profile
+ln -s ~/.unixenv/yp_vimrc yp_vimrc
+ln -s ~/.unixenv/yp_env_vars yp_env_vars
+ln -s ~/.unixenv/.vimrc .vimrc
+ln -s ~/.unixenv/.bash_aliases .bash_aliases
+ln -s ~/.unixenv/.p10k.zsh .p10k.zsh
 ```
 
 ## Prepare and Setup Vim
@@ -128,7 +127,7 @@ fi
 #### Use Zsh on Tmux
 
 ```bash
-ln -s unixenv/.tmux.zsh.conf .tmux.conf
+ln -s ~/.unixenv/.tmux.zsh.conf ~/.tmux.conf
 ```
 
 ### Use Bash
@@ -136,7 +135,7 @@ ln -s unixenv/.tmux.zsh.conf .tmux.conf
 #### Use Bash on Tmux
 
 ```bash
-ln -s unixenv/.tmux.bash.conf .tmux.conf
+ln -s ~/.unixenv/.tmux.bash.conf ~/.tmux.conf
 ```
 
 ## Prepare and Setup Tmux
@@ -145,5 +144,19 @@ ln -s unixenv/.tmux.bash.conf .tmux.conf
 
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+## Prepare and Setup [Conky](https://github.com/brndnmtthws/conky) for Linux
+
+```bash
+sudo apt-get install conky-all
+ln -s ~/.unixenv/.conkyrc ~/.conkyrc
+```
+
+And, launch `conky` at session start
+
+```bash
+mkdir -p ~/.config/autostart
+ln -s ~/.unixenv/conky.desktop ~/.config/autostart/conky.desktop
 ```
 

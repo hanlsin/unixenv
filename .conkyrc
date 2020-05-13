@@ -1,0 +1,139 @@
+# Minimalis Conky 1.2.2 -- tested on Fedora 16 (Gnome Shell Desktop)
+# Author : deny26
+# Release date : March, 20 2012
+# Email : deny.krishna108@gmail.com
+# Site : http://ubuntu-indonesia.com
+# Feel free to modity this script ;)
+
+background yes
+font Droid Sans:size=10
+xftfont Droid Sans:size=10
+use_xft yes
+xftalpha 0.5
+update_interval 1.0
+total_run_times 0
+
+# for gnome 2.x user uncomment the following line
+#own_window yes
+#own_window_type override
+#own_window_transparent yes
+#own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# for gnome 3.x user uncomment the following line
+own_window_class Conky
+own_window yes
+own_window_type conky
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# for kde user
+#own_window yes
+#own_window_transparent yes
+##own_window_argb_visual yes
+#own_window_type normal
+#own_window_class conky-semi
+#own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+double_buffer yes
+draw_shades yes
+draw_outline yes
+draw_borders no
+draw_graph_borders yes
+minimum_size 250
+maximum_width 250
+default_color ffffff
+default_shade_color 000000
+draw_outline no
+alignment top_right
+gap_x 10
+gap_y 35
+no_buffers yes
+cpu_avg_samples 2
+override_utf8_locale yes
+uppercase no
+use_spacer none
+
+TEXT
+${font FontAwesome5Brands:style=Regular:size=20}${font} ${voffset -5}${goto 40}GNU/Linux»
+${goto 45}Distro: Ubuntu
+${goto 45}Kernel: $kernel
+${goto 45}Uptime: $uptime_short
+
+${font FontAwesome5Free:style=Solid:size=16}${font} ${voffset -2}${goto 40}CPU»
+${goto 45}${font Droid Sans:size=9}CPU0: ${cpu cpu0}% ${goto 135}CPU4: ${cpu cpu4}%${font}
+${goto 45}${cpubar cpu0 7,70}${goto 135}${cpubar cpu4 7,70}
+${goto 45}${font Droid Sans:size=9}CPU1: ${cpu cpu1}% ${goto 135}CPU5: ${cpu cpu5}%${font}
+${goto 45}${cpubar cpu1 7,70}${goto 135}${cpubar cpu5 7,70}
+${goto 45}${font Droid Sans:size=9}CPU2: ${cpu cpu2}% ${goto 135}CPU6: ${cpu cpu6}%${font}
+${goto 45}${cpubar cpu2 7,70}${goto 135}${cpubar cpu6 7,70}
+${goto 45}${font Droid Sans:size=9}CPU3: ${cpu cpu3}% ${goto 135}CPU7: ${cpu cpu7}%${font}
+${goto 45}${cpubar cpu3 7,70}${goto 135}${cpubar cpu7 7,70}
+
+${font FontAwesome5Free:style=Solid:size=16}${font} ${voffset -2}${goto 40}Memory»
+${goto 45}${font Droid Sans:size=9}${mem} / ${memmax}${font}
+${goto 45}${font Droid Sans:size=9}RAM: ${memperc}% ${goto 135}SWAP: ${swapperc}%${font}
+${goto 45}${membar 7,70}${goto 135}${swapbar 7,70}
+
+${font FontAwesome5Free:style=Solid:size=16}${font} ${voffset -2}${goto 40}Harddisk»
+${goto 45}${font Droid Sans:size=9}${fs_free /}/${fs_size /}
+${goto 45}${font}${fs_bar 7,200 /}
+${goto 45}$stippled_hr
+${goto 45}${diskiograph_read 70,200 07CC0D FF0000 -t}
+${font FontAwesome5Free:style=Solid:size=12}${goto 45}${font} ${font Droid Sans:size=9}${voffset -2}diskio read: ${diskio_read}${font}
+${goto 45}$stippled_hr
+${goto 45}${diskiograph_write 70,200 07CC0D FF0000 -t}
+${font FontAwesome5Free:style=Solid:size=12}${goto 45}${font} ${font Droid Sans:size=9}${voffset -2}diskio write: ${diskio_write}${font}
+
+#${font FontAwesome5Free:style=Solid:size=16}${font} ${voffset -2}${goto 40}Network»
+#${goto 45}${font Droid Sans:size=9}Total Download: ${totaldown enp3s0}${font} 
+#${goto 45}$stippled_hr
+#${goto 45}${upspeedgraph enp3s0 30,150 06E9F8 2104FA}
+#${font FontAwesome5Free:style=Solid:size=12}${goto 45}${font} ${font Droid Sans:size=9}${voffset -2}net upload: ${upspeed enp3s0}${font}
+#${goto 45}$stippled_hr
+#${goto 45}${downspeedgraph enp3s0 30,150 FFFF00 DD3A21}
+#${font FontAwesome5Free:style=Solid:size=12}${goto 45}${font} ${font Droid Sans:size=9}${voffset -2}net download: ${downspeed enp3s0}${font}
+#
+${font FontAwesome5Free:style=Solid:size=16}${font} ${voffset -2}${goto 40}Wireless»
+${goto 45}${font Droid Sans:size=9}Total Download: ${totaldown wlp2s0}${font} 
+${goto 45}$stippled_hr
+${goto 45}${upspeedgraph wlp2s0 70,200 07CC0D FF0000 -t}
+${font FontAwesome5Free:style=Solid:size=12}${goto 45}${font} ${font Droid Sans:size=9}${voffset -2}net upload: ${upspeed wlp2s0}${font}
+${goto 45}$stippled_hr
+${goto 45}${downspeedgraph wlp2s0 70,200 07CC0D FF0000 -t}
+${font FontAwesome5Free:style=Solid:size=12}${goto 45}${font} ${font Droid Sans:size=9}${voffset -2}net download: ${downspeed wlp2s0}${font}
+
+#${font FontAwesome5Free:style=Solid:size=16}${font} ${voffset -2}${goto 40}Wireless»
+#${goto 45}ESSID: ${wireless_essid wlan0}
+#${goto 45}Mode: ${wireless_mode wlan0}
+#${goto 45}Signal: ${wireless_link_qual_perc wlan0}
+#${goto 45}Download: ${downspeed wlan0}
+#${goto 45}Upload: ${upspeed wlan0}
+#${goto 45}Total Download: ${totaldown wlan0}
+#
+${voffset 8}${font FontAwesome5Free:style=Solid:size=14}${font} ${voffset -2}${goto 40}Processes»
+${goto 35}${alignr}top cpu
+${goto 35}${font Droid Sans:size=8}Name ${goto 150}${alignc}PID ${alignr}MEM%  ${alignr}CPU%${font}
+${goto 35}${top name 1} ${goto 100} $alignr${top pid 1} $alignr${top mem 1} $alignr${top cpu 1}
+${goto 35}${top name 2} ${goto 100} $alignr${top pid 2} $alignr${top mem 2} $alignr${top cpu 2}
+${goto 35}${top name 3} ${goto 100} $alignr${top pid 3} $alignr${top mem 3} $alignr${top cpu 3}
+${goto 35}${top name 4} ${goto 100} $alignr${top pid 4} $alignr${top mem 4} $alignr${top cpu 4}
+${goto 35}${top name 5} ${goto 100} $alignr${top pid 5} $alignr${top mem 5} $alignr${top cpu 5}
+${goto 35}${top name 6} ${goto 100} $alignr${top pid 6} $alignr${top mem 6} $alignr${top cpu 6}
+${goto 35}${top name 7} ${goto 100} $alignr${top pid 7} $alignr${top mem 7} $alignr${top cpu 7}
+${goto 35}$stippled_hr
+${goto 35}${alignr}top memory
+${goto 35}${font Droid Sans:size=8}Name ${goto 150}${alignc}PID ${alignr}CPU%  ${alignr}MEM%${font}
+${goto 35}${top_mem name 1} ${goto 100} $alignr${top_mem pid 1} $alignr${top_mem cpu 1} $alignr${top_mem mem 1}
+${goto 35}${top_mem name 2} ${goto 100} $alignr${top_mem pid 2} $alignr${top_mem cpu 2} $alignr${top_mem mem 2}
+${goto 35}${top_mem name 3} ${goto 100} $alignr${top_mem pid 3} $alignr${top_mem cpu 3} $alignr${top_mem mem 3}
+${goto 35}${top_mem name 4} ${goto 100} $alignr${top_mem pid 4} $alignr${top_mem cpu 4} $alignr${top_mem mem 4}
+${goto 35}${top_mem name 5} ${goto 100} $alignr${top_mem pid 5} $alignr${top_mem cpu 5} $alignr${top_mem mem 5}
+${goto 35}${top_mem name 6} ${goto 100} $alignr${top_mem pid 6} $alignr${top_mem cpu 6} $alignr${top_mem mem 6}
+${goto 35}${top_mem name 7} ${goto 100} $alignr${top_mem pid 7} $alignr${top_mem cpu 7} $alignr${top_mem mem 7}
+
+${goto 35}Processes: $processes
+${goto 35}Running: $running_processes
+
+# comment this code if you not using kde
+#${texeci 1000 feh --bg-scale ~/.kde4/share/wallpapers/ArchLinux.jpg}
+
