@@ -66,6 +66,10 @@ Plug 'tpope/vim-fugitive'
 " https://github.com/tpope/vim-markdown
 Plug 'tpope/vim-markdown'
 
+" Vim Dev Icons
+" https://github.com/ryanoasis/vim-devicons
+Plug 'ryanoasis/vim-devicons'
+
 " XXX Add all your plugins here
 "       , and then :PlugInstall
 "       To remove, just remove line, and then :PlugUpdate and :PlugClean
