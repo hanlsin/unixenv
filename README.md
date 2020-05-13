@@ -29,6 +29,44 @@ ln -s unixenv/.bash_aliases .bash_aliases
 ln -s unixenv/.p10k.zsh .p10k.zsh
 ```
 
+## Prepare and Setup Vim
+
+### Prepare plugin managers
+
+#### for [vim-plug](https://github.com/junegunn/vim-plug)
+
+```bash
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+#### for [Vundle](https://github.com/VundleVim/Vundle.vim)
+
+```bash
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
+### Setup plugin managers
+
+```
+vi .vimrc
+:PlugInstall
+:PluginInstall
+```
+
+If it's not working, please re-install `vim` again.
+
+#### Mac
+
+```bash
+brew install vim
+```
+
+#### Ubuntu
+
+```bash
+sudo apt install vim
+```
+
 ### Use Zsh
 
 #### Setup [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
@@ -99,44 +137,6 @@ ln -s unixenv/.tmux.zsh.conf .tmux.conf
 
 ```bash
 ln -s unixenv/.tmux.bash.conf .tmux.conf
-```
-
-## Prepare and Setup Vim
-
-### Prepare plugin managers
-
-#### for [vim-plug](https://github.com/junegunn/vim-plug)
-
-```bash
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-#### for [Vundle](https://github.com/VundleVim/Vundle.vim)
-
-```bash
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
-### Setup plugin managers
-
-```
-vi .vimrc
-:PlugInstall
-:PluginInstall
-```
-
-If it's not working, please re-install `vim` again.
-
-#### Mac
-
-```bash
-brew install vim
-```
-
-#### Ubuntu
-
-```bash
-sudo apt install vim
 ```
 
 ## Prepare and Setup Tmux
