@@ -153,7 +153,7 @@ sudo apt-get install conky-all
 ln -s ~/.unixenv/.conkyrc ~/.conkyrc
 ```
 
-And, launch `conky` at session start
+~~And, launch `conky` at session start~~(not working on Ubuntu)
 
 ```bash
 mkdir -p ~/.config/autostart
