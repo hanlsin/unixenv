@@ -146,7 +146,7 @@ ln -s ~/.unixenv/tmux.bash.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-## Prepare and Setup [Conky](https://github.com/brndnmtthws/conky) for Linux
+## Prepare and Setup [Conky](https://github.com/brndnmtthws/conky) for Linux GUI
 
 ```bash
 sudo apt-get install conky-all
