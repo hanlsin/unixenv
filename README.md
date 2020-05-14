@@ -20,12 +20,12 @@ git clone https://github.com/hanlsin/unixenv.git ~/.unixenv
 ### Create symbolic links
 
 ```bash
-ln -s ~/.unixenv/bash_aliases .bash_aliases
-ln -s ~/.unixenv/yp_profile .yp_profile
-ln -s ~/.unixenv/yp_env_vars .yp_env_vars
-ln -s ~/.unixenv/yp_vimrc .yp_vimrc
-ln -s ~/.unixenv/vimrc .vimrc
-ln -s ~/.unixenv/p10k.zsh .p10k.zsh
+ln -s ~/.unixenv/bash_aliases ~/.bash_aliases
+ln -s ~/.unixenv/yp_profile ~/.yp_profile
+ln -s ~/.unixenv/yp_env_vars ~/.yp_env_vars
+ln -s ~/.unixenv/yp_vimrc ~/.yp_vimrc
+ln -s ~/.unixenv/vimrc ~/.vimrc
+ln -s ~/.unixenv/p10k.zsh ~/.p10k.zsh
 ```
 
 ## Prepare and Setup Vim
