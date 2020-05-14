@@ -14,7 +14,7 @@ This is a repository to store YP's common enviroment files for unix-like OS.
 ### Clone the repository
 
 ```bash
-git clone git@github.com:hanlsin/unixenv.git ~/.unixenv
+git clone https://github.com/hanlsin/unixenv.git ~/.unixenv
 ```
 
 ### Create symbolic links
