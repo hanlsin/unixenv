@@ -132,62 +132,62 @@ endif
 
 """ ========================================================
 " call yp_vimrc using vim-plug
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_vimplug")
-	so $HOME/yp_vimrc/yp_vimrc_vimplug
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_vimplug")
+	so $YP_VIMRC_DIR/yp_vimrc_vimplug
 endif
 
 
 """ ========================================================
 " call yp_vimrc using vundle
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_vundle")
-	so $HOME/yp_vimrc/yp_vimrc_vundle
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_vundle")
+	so $YP_VIMRC_DIR/yp_vimrc_vundle
 endif
 
 
 """ ========================================================
 """ 추가 vimrc 로딩.
 " python 설정
-"au FileType python so $HOME/yp_vimrc/yp_vimrc_py
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_py")
-	so $HOME/yp_vimrc/yp_vimrc_py
+"au FileType python so $YP_VIMRC_DIR/yp_vimrc_py
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_py")
+	so $YP_VIMRC_DIR/yp_vimrc_py
 endif
 " c 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_c")
-	so $HOME/yp_vimrc/yp_vimrc_c
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_c")
+	so $YP_VIMRC_DIR/yp_vimrc_c
 endif
 " web language 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_web")
-	so $HOME/yp_vimrc/yp_vimrc_web
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_web")
+	so $YP_VIMRC_DIR/yp_vimrc_web
 endif
 " golang 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_go")
-	so $HOME/yp_vimrc/yp_vimrc_go
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_go")
+	so $YP_VIMRC_DIR/yp_vimrc_go
 endif
 " Ethereum solidity 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_sol")
-	so $HOME/yp_vimrc/yp_vimrc_sol
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_sol")
+	so $YP_VIMRC_DIR/yp_vimrc_sol
 endif
 " yaml 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_yaml")
-	so $HOME/yp_vimrc/yp_vimrc_yaml
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_yaml")
+	so $YP_VIMRC_DIR/yp_vimrc_yaml
 endif
 " lua 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_lua")
-	so $HOME/yp_vimrc/yp_vimrc_lua
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_lua")
+	so $YP_VIMRC_DIR/yp_vimrc_lua
 endif
 " markdown 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_md")
-	so $HOME/yp_vimrc/yp_vimrc_md
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_md")
+	so $YP_VIMRC_DIR/yp_vimrc_md
 endif
 " reStructuredText 설정
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_rst")
-	so $HOME/yp_vimrc/yp_vimrc_rst
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_rst")
+	so $YP_VIMRC_DIR/yp_vimrc_rst
 endif
 
 
 """ ========================================================
 " call yp_vimrc_end
-if filereadable($HOME . "/yp_vimrc/yp_vimrc_end")
-	so $HOME/yp_vimrc/yp_vimrc_end
+if filereadable($YP_VIMRC_DIR . "/yp_vimrc_end")
+	so $YP_VIMRC_DIR/yp_vimrc_end
 endif
 
