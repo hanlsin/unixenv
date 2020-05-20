@@ -57,7 +57,7 @@ Plugin 'scrooloose/nerdtree'
 "" Super Searching
 " search for basically anything from VIM. CTRL-P <keyword>
 " https://github.com/ctrlpvim/ctrlp.vim
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 "" Git Integration
 "Plugin 'tpope/vim-fugitive'
