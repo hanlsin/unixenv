@@ -112,11 +112,11 @@ Input the below in the `.zshrc` file.
 
 ##### Setup font
 
-```bash
-git clone https://github.com/powerline/fonts.git /tmp/powerlevel9k-fonts && cd $_
-./install.sh
-cd ~ && rm -rf /tmp/powerlevel9k-fonts
-```
+I recommend to install the `Meslo Nerd Font` font via
+
+* [Powerlevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+* [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+
 
 #### Setup personal envs
 
