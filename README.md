@@ -110,6 +110,14 @@ Input the below in the `.zshrc` file.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 ```
 
+##### Setup font
+
+```bash
+git clone https://github.com/powerline/fonts.git /tmp/powerlevel9k-fonts && cd $_
+./install.sh
+cd ~ && rm -rf /tmp/powerlevel9k-fonts
+```
+
 #### Setup personal envs
 
 ```bash
