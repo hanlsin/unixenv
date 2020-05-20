@@ -48,30 +48,30 @@ fi
 ####
 
 # prompt profile
-if [ -f ~/yp_profile/yp_prompt_profile ]; then
-    . ~/yp_profile/yp_prompt_profile
+if [ -f $YP_PROFILE_DIR/yp_prompt_profile ]; then
+    . $YP_PROFILE_DIR/yp_prompt_profile
 fi
 fn_fancy_prompt
 
 # compound commands profile
-if [ -f ~/yp_profile/yp_command_profile ]; then
-    . ~/yp_profile/yp_command_profile
+if [ -f $YP_PROFILE_DIR/yp_command_profile ]; then
+    . $YP_PROFILE_DIR/yp_command_profile
 fi
 alias findpid='fn_findpid'
 
 # python profile
-if [ -f ~/yp_profile/yp_python_profile ]; then
-    . ~/yp_profile/yp_python_profile
+if [ -f $YP_PROFILE_DIR/yp_python_profile ]; then
+    . $YP_PROFILE_DIR/yp_python_profile
 fi
 
 # golang profile
-if [ -f ~/yp_profile/yp_golang_profile ]; then
-    . ~/yp_profile/yp_golang_profile
+if [ -f $YP_PROFILE_DIR/yp_golang_profile ]; then
+    . $YP_PROFILE_DIR/yp_golang_profile
 fi
 
 # ROS profile
-if [ -f ~/yp_profile/yp_ros_profile ]; then
-    . ~/yp_profile/yp_ros_profile
+if [ -f $YP_PROFILE_DIR/yp_ros_profile ]; then
+    . $YP_PROFILE_DIR/yp_ros_profile
 fi
 
 # for TIBERO
@@ -80,14 +80,14 @@ fi
 #fi
 
 # for Blocko
-if [ -f ~/yp_profile/blocko_profile ]; then
-    . ~/yp_profile/blocko_profile
+if [ -f $YP_PROFILE_DIR/blocko_profile ]; then
+    . $YP_PROFILE_DIR/blocko_profile
 fi
 
 # for Loblo
-if [ -f ~/yp_profile/loblo_profile ]; then
-    . ~/yp_profile/loblo_profile
-fi
+#if [ -f $YP_PROFILE_DIR/loblo_profile ]; then
+#    . $YP_PROFILE_DIR/loblo_profile
+#fi
 
 
 ###############################################################################
