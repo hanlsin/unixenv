@@ -1,5 +1,8 @@
 #!/bin/sh
 
+export YP_VIMRC_DIR="$HOME/.yp_vimrc"
+export YP_PROFILE_DIR="$HOME/.yp_profile"
+
 # netcheck shortcut
 alias netcheck="lsof -i -P | grep -i listen"
 
