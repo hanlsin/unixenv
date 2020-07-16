@@ -1,5 +1,9 @@
 #!/bin/sh
 
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
 export YP_VIMRC_DIR="$HOME/.yp_vimrc"
 export YP_PROFILE_DIR="$HOME/.yp_profile"
 
@@ -20,6 +24,9 @@ export PATH=$PATH:$CRUDINI_PATH
 
 # for GIT
 alias ga="git add -p"
+
+## for Github
+alias github="cd ${HOME}/github.com"
 
 # for Golang
 export GOPATH=${YP_WORK}/go

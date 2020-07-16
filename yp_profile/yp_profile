@@ -50,8 +50,8 @@ fi
 # prompt profile
 if [ -f $YP_PROFILE_DIR/yp_prompt_profile ]; then
     . $YP_PROFILE_DIR/yp_prompt_profile
+    fn_fancy_prompt
 fi
-fn_fancy_prompt
 
 # compound commands profile
 if [ -f $YP_PROFILE_DIR/yp_command_profile ]; then

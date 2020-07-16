@@ -1,6 +1,9 @@
+
+YP_PROFILE_DIR=~/.yp_profile
+
 # for YP personal bash scripts
-if [ -f ~/.yp_profile/yp_profile ]; then
-	. ~/.yp_profile/yp_profile
+if [ -f $YP_PROFILE_DIR/yp_profile ]; then
+	. $YP_PROFILE_DIR/yp_profile
 fi
 
 # Personal settings.
