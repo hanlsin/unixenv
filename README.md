@@ -127,8 +127,8 @@ vi ~/.zshrc
 Input the below in the `.zshrc` file.
 
 ```
-if [ -f ~/.yp_env_vars ]; then
-    . ~/.yp_env_vars
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 ```
 
