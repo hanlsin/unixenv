@@ -26,7 +26,13 @@ ln -s ~/.unixenv/yp_env_vars ~/.yp_env_vars
 ln -s ~/.unixenv/yp_vimrc ~/.yp_vimrc
 ln -s ~/.unixenv/vimrc ~/.vimrc
 ln -s ~/.unixenv/p10k.zsh ~/.p10k.zsh
+touch ~/.local_env
 ```
+
+There is a new env file to prevent uploading critical inforation on github accidently.
+
+You can insert any aliases or variables in `~/.local_env`, and it will be safe from accidental uploading.
+
 
 ## Use [screenFetch](https://github.com/KittyKatt/screenFetch)
 
