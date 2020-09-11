@@ -7,39 +7,87 @@ export LC_CTYPE="en_US.UTF-8"
 export YP_VIMRC_DIR="$HOME/.yp_vimrc"
 export YP_PROFILE_DIR="$HOME/.yp_profile"
 
+export YP_BIN_HOME=${HOME}/bin
+export YP_WORK_HOME=${HOME}/work
+
 # netcheck shortcut
 alias netcheck="lsof -i -P | grep -i listen"
 
 # vim
 alias vim="vi"
 
-# gitk
-alias gitk="gitk --all"
-
 # crudini
 # https://github.com/pixelb/crudini
-export CRUDINI_HOME=${YP_WORK}/bin/crudini-0.9.3
-export CRUDINI_PATH=${CRUDINI_HOME}
-export PATH=$PATH:$CRUDINI_PATH
+#export CRUDINI_HOME=${YP_WORK_HOME}/bin/crudini-0.9.3
+#export CRUDINI_PATH=${CRUDINI_HOME}
+#export PATH=$PATH:$CRUDINI_PATH
 
 # for GIT
-alias ga="git add -p"
+export GIT_REPOS_HOME=${HOME}/git_repos
+# for mac
+#alias gitk="gitk --all"
+# for wsl2
+#alias gitk="/mnt/c/Program\ Files/Git/cmd/gitk.exe --all --branches"
+alias grepos="cd ${GIT_REPOS_HOME}"
+alias ga="git add --patch"
+# shortcuts in the git plugin of zsh
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
+# freq.
+#   - ghh: git help
+#   - glgp: 커밋 로그 상세보기 (소스포함)
+#   - gloga: 커밋 그래프 전체
+#   - glola: 커밋 그래프 전체 with 추가 정보
+#   - gfa: git fetch --all --prune
+#   - gfg <keyword>: got ls-files | grep: git 등록된 파일 찾기
+#   - gba: git branch -a: 모든 브랜치 보기
+alias gitlog="glg"
+alias gitlogd="glgp"
+alias gitgraph="glola"
+alias gitref="git reflog"
 
 ## for Github
-alias github="cd ${HOME}/github.com"
+export GITHUB_REPOS_HOME=${GIT_REPOS_HOME}/github.com
+alias github="cd ${GITHUB_REPOS_HOME}"
 
 # for Golang
-export GOPATH=${YP_WORK}/go
-alias gopath="cd ${GOPATH}/src"
+#export GOPATH=${YP_WORK_HOME}/go
+#alias gopath="cd ${GOPATH}/src"
+
+# for Python
+export PYTHON_USER_PATH="$(python3 -m site --user-base)/bin"
+export PATH=$PATH:$PYTHON_USER_PATH
+
+# for miniconda
+export MINICONDA_HOME=${YP_BIN_HOME}/miniconda3
+# FIXME: below alias makes error:
+#   /home/yp/bin/miniconda3/etc/profile.d/conda.sh:75: defining function based on alias `conda'
+#   /home/yp/bin/miniconda3/etc/profile.d/conda.sh:75: parse error near `()'
+#alias conda="$MINICONDA_HOME/condabin/conda"
+alias condaactivate="source $MINICONDA_HOME/bin/activate"
+MINICONDA_BIN="$MINICONDA_HOME/condabin/conda"
+alias condacreaten="$MINICONDA_BIN create -n"
+alias condacreatef="$MINICONDA_BIN env create -f"
+alias condaremove="$MINICONDA_BIN env remove -n"
+alias condalist="$MINICONDA_BIN env list"
+alias condaexport="$MINICONDA_BIN env export"
+alias condadeactivate="$MINICONDA_BIN deactivate"
+
+# for redis-5.0.5
+export REDIS_HOME=${YP_BIN_HOME}/redis
+
+# for Postgresql
+#alias psql="sudo -u postgres psql"
+alias psql_start="sudo service postgresql start"
+alias psql_stop="sudo service postgresql stop"
+alias psqlroot="psql -U postgres -h localhost"
 
 # check shell
 export WHICH_SH=`ps -p $$ -o command=`
 if [ "${WHICH_SH}" = "-zsh" ];
 then
 	export SHELL=/bin/zsh
-	echo "You are using ZSH"
+	echo -e "You are using \e[4;92mZSH\e[0m"
 elif [ "${WHICH_SH}" = "-bash" ];
 then
-	echo "You are using BASH"
+	echo -e "You are using \e[4;96mBASH\e[0m"
 fi
-

@@ -28,6 +28,30 @@ ln -s ~/.unixenv/vimrc ~/.vimrc
 ln -s ~/.unixenv/p10k.zsh ~/.p10k.zsh
 ```
 
+## Use [screenFetch](https://github.com/KittyKatt/screenFetch)
+
+To disply Bash information.
+
+### [Install](https://github.com/KittyKatt/screenFetch/wiki/Installation)
+
+#### Mac
+
+```bash
+brew install screenfetch
+```
+
+#### Ubuntu
+
+```bash
+sudo apt install screenfetch
+```
+
+### Set in bash
+
+```bash
+echo "screenfetch" > ~/.bashrc
+```
+
 ## Prepare and Setup Vim
 
 ### Prepare plugin managers
@@ -67,6 +91,20 @@ sudo apt install vim
 ```
 
 ### Use Zsh
+
+### Install Zsh
+
+#### Mac
+
+```bash
+brew install zsh
+```
+
+#### Ubuntu
+
+```bash
+sudo apt install zsh
+```
 
 #### Setup [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
 

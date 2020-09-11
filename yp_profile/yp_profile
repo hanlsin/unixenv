@@ -105,12 +105,12 @@ alias tk='tmux kill-session -t '
 #export LSCOLORS=
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias ls='ls --color=auto'
-	alias ll='ls --color=auto -al'
+	alias ll='ls --color=auto -alh'
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	alias ls='ls -G'
-	alias ll='ls -G -al'
+	alias ll='ls -G -alh'
 else
-	alias ll='ls -G -al'
+	alias ll='ls -G -alh'
 fi
 
 # for virtualenv
