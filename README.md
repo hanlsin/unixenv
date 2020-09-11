@@ -55,7 +55,7 @@ sudo apt install screenfetch
 ### Set in bash
 
 ```bash
-echo "screenfetch" > ~/.bashrc
+echo "screenfetch" >> ~/.local_env
 ```
 
 ## Prepare and Setup Vim
@@ -82,7 +82,7 @@ vi .vimrc
 :PluginInstall
 ```
 
-If it's not working, please re-install `vim` again.
+If it's not working, please re-install `vim`.
 
 #### Mac
 
