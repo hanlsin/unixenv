@@ -77,8 +77,8 @@ export REDIS_HOME=${YP_BIN_HOME}/redis
 
 # for Postgresql
 #alias psql="sudo -u postgres psql"
-alias psql_start="sudo service postgresql start"
-alias psql_stop="sudo service postgresql stop"
+#alias psql_start="sudo service postgresql start"
+#alias psql_stop="sudo service postgresql stop"
 alias psqlroot="psql -U postgres -h localhost"
 
 # check shell
