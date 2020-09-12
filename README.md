@@ -171,9 +171,7 @@ vi ~/.zshrc
 Input the below in the `.zshrc` file.
 
 ```
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+[[ ! -f $HOME/.bash_aliases ]] || source $HOME/.bash_aliases
 ```
 
 #### Use Zsh on Tmux
