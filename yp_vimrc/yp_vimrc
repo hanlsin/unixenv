@@ -20,13 +20,13 @@ set noignorecase            " 검색 시 대소문자 구별하지 않음
 set title                   " 제목 표시줄에 파일명 표시
 set novisualbell            " 경고소리를 깜빡임으로 대치하지 않음
 set binary                  " to view a binary file in a hex view
-set noexpandtab             " Tab 대신 Space 삽입: expandtab/noexpandtab
+"set noexpandtab             " Tab 대신 Space 삽입: expandtab/noexpandtab
 "set ts=8                    " tabstop. size of tab
 "set sw=8                    " shiftwidth. size of indent
 "set sts=4                   " softtabstop. size of soft tab
 "set smarttab
 " for 4 space characters tab
-set ts=4 sts=0 expandtab sw=4 smarttab
+set ts=4 expandtab sw=4 smartindent
 set splitbelow              " set new window is below
 set splitright              " set new window is right 
 set encoding=utf-8          " set encoding as UTF-8

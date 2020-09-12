@@ -2,10 +2,10 @@
 """ vim configuration for Golang.
 
 """ Indentation
-au BufNewFile,BufRead *.yaml
+au BufNewFile,BufRead *.yaml,*.yml
 	\ set nu            |
-    \ set tabstop=2     |
+    \ set tabstop=4     |
     \ set shiftwidth=2  |
-    \ set softtabstop=2 |
+    \ set smartindent   |
     \ set expandtab
 
