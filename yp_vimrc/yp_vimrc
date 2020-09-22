@@ -148,9 +148,12 @@ endif
 """ 추가 vimrc 로딩.
 " python 설정
 "au FileType python so $YP_VIMRC_DIR/yp_vimrc_py
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_py")
-	so $YP_VIMRC_DIR/yp_vimrc_py
-endif
+"if filereadable($YP_VIMRC_DIR . "/yp_vimrc_py")
+"	so $YP_VIMRC_DIR/yp_vimrc_py
+"endif
+" trigger vim-flake8 when to save
+" See: https://nvie.com/posts/vim-flake8-flake8-for-vim/
+autocmd BufWritePost *.py call Flake8()
 " c 설정
 if filereadable($YP_VIMRC_DIR . "/yp_vimrc_c")
 	so $YP_VIMRC_DIR/yp_vimrc_c

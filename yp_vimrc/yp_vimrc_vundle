@@ -28,12 +28,16 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'ervandew/supertab'
 
 "" Python Syntax Checking/Highlighting
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-scripts/Pydiction'
+"Plugin 'scrooloose/syntastic'
+" Issue: https://github.com/vim-syntastic/syntastic/issues/1924
+" cannot use with vim-flake8
 " PEP8 checking
-Plugin 'nvie/vim-flake8'
+" See https://github.com/nvie/vim-flake8
+"Plugin 'nvie/vim-flake8'
 " auto-indentation
-Plugin 'vim-scripts/indentpython.vim'
+"Plugin 'vim-scripts/indentpython.vim'
+" black
+Plugin 'ambv/black'
 
 "" HTML Syntax Checking/Highlighting
 " isnowfy only compatible with python not python3
@@ -97,3 +101,7 @@ filetype plugin indent on    " required
 """ Vundle 설정 끝
 """ ========================================================
 
+
+""" ========================================================
+""" flake8 설정
+""" ~/.config/flake8
