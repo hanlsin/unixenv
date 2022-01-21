@@ -56,7 +56,7 @@ Plug 'https://github.com/jnurmine/Zenburn', { 'colorscheme': 'zenburn' }
 
 " vim-go
 " https://github.com/fatih/vim-go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " fugitive.vim
 " https://github.com/tpope/vim-fugitive

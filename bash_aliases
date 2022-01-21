@@ -15,3 +15,9 @@ fi
 if [ -f ~/.local_env ]; then
 	. ~/.local_env
 fi
+
+# bcbank settings.
+if [ -f ~/.bcbank ]; then
+	. ~/.bcbank
+fi
+

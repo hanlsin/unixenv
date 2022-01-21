@@ -33,11 +33,11 @@ Plugin 'ervandew/supertab'
 " cannot use with vim-flake8
 " PEP8 checking
 " See https://github.com/nvie/vim-flake8
-"Plugin 'nvie/vim-flake8'
+Plugin 'nvie/vim-flake8'
 " auto-indentation
 "Plugin 'vim-scripts/indentpython.vim'
 " black
-Plugin 'ambv/black'
+"Plugin 'ambv/black'
 
 "" HTML Syntax Checking/Highlighting
 " isnowfy only compatible with python not python3

@@ -878,6 +878,7 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
   #typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # for python virtualenv
   typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION='🐍 '
 
   #####################[ anaconda: conda environment (https://conda.io/) ]######################
@@ -890,6 +891,7 @@
   typeset -g POWERLEVEL9K_ANACONDA_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
   # typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # for python anaconda
   typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION='🍕 '
 
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################

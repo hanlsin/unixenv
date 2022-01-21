@@ -38,11 +38,15 @@ alias ga="git add --patch"
 #   - gloga: 커밋 그래프 전체
 #   - glola: 커밋 그래프 전체 with 추가 정보
 #   - gfa: git fetch --all --prune
-#   - gfg <keyword>: got ls-files | grep: git 등록된 파일 찾기
+#   - gfg <keyword>: git ls-files | grep: git 등록된 파일 찾기
 #   - gba: git branch -a: 모든 브랜치 보기
+#   - gsw: git switch
+#   - grs: git restore
 alias gitlog="glg"
 alias gitlogd="glgp"
 alias gitgraph="glola"
+alias gitgraphs="glola --stat"
+alias gitgraphd="glola --stat -p"
 alias gitref="git reflog"
 
 ## for Github
