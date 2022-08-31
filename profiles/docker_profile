@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Delete all stopped containers (including data-only containers).
+#docker ps -a -q --no-trunc --filter "status=exited" | xargs --no-run-if-empty docker rm -v
+
+# Delete all tagged images more than a month old
+# (will fail to remove images still used).
+#docker images --no-trunc --format '{{.ID}} {{.CreatedSince}}' | grep ' months' | awk '{ print $1 }' | xargs --no-run-if-empty docker rmi || true
+
+# Delete all 'untagged/dangling' (<none>) images
+# Those are used for Docker caching mechanism.
+#docker images -q --no-trunc --filter dangling=true | xargs --no-run-if-empty docker rmi
+
+# Delete all dangling volumes.
+#docker volume ls -qf dangling=true | xargs --no-run-if-empty docker volume rm

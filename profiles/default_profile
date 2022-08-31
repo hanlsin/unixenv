@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# @brief  Set personal environment to develope.
+#
+# @author   Yun Park
+
+###############################################################################
+# Default environment
+####
+
+# check OS
+os=`uname`
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	echo $os
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	# Mac OSX
+	echo $os
+	export CLICOLOR=1
+	export LSCOLORS=GxFxCxDxBxegedabagaced
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+	# POSIX compatibility layer and Linux environment emulation for Windows
+	echo $os
+elif [[ "$OSTYPE" == "msys" ]]; then
+	# Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+	echo $os
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+	# FreeBSD
+	echo $os
+else
+	# Unknown.
+	echo $os
+fi
+
+# check environment variable HOME exist
+if env | grep -q ^HOME=
+then
+	uname=`whoami`
+	if [[ "$OSTYPE" == "linux-gnu" ]]; then
+		export HOME=/home/$uname
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		export HOME=/Users/$uname
+	fi
+fi

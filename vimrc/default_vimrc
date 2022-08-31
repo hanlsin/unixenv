@@ -131,66 +131,66 @@ endif
 
 
 """ ========================================================
-" call yp_vimrc using vim-plug
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_vimplug")
-	so $YP_VIMRC_DIR/yp_vimrc_vimplug
+" call vim-plug
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_vimplug")
+	so $UNIXENV_VIMRC_PATH/vimrc_vimplug
 endif
 
 
 """ ========================================================
-" call yp_vimrc using vundle
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_vundle")
-	so $YP_VIMRC_DIR/yp_vimrc_vundle
+" call vundle
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_vundle")
+	so $UNIXENV_VIMRC_PATH/vimrc_vundle
 endif
 
 
 """ ========================================================
 """ 추가 vimrc 로딩.
 " python 설정
-"au FileType python so $YP_VIMRC_DIR/yp_vimrc_py
-"if filereadable($YP_VIMRC_DIR . "/yp_vimrc_py")
-"	so $YP_VIMRC_DIR/yp_vimrc_py
+"au FileType python so $UNIXENV_VIMRC_PATH/vimrc_py
+"if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_py")
+"	so $UNIXENV_VIMRC_PATH/vimrc_py
 "endif
 " trigger vim-flake8 when to save
 " See: https://nvie.com/posts/vim-flake8-flake8-for-vim/
-autocmd BufWritePost *.py call Flake8()
+"autocmd BufWritePost *.py call Flake8()
 " c 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_c")
-	so $YP_VIMRC_DIR/yp_vimrc_c
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_c")
+	so $UNIXENV_VIMRC_PATH/vimrc_c
 endif
 " web language 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_web")
-	so $YP_VIMRC_DIR/yp_vimrc_web
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_web")
+	so $UNIXENV_VIMRC_PATH/vimrc_web
 endif
 " golang 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_go")
-	so $YP_VIMRC_DIR/yp_vimrc_go
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_go")
+	so $UNIXENV_VIMRC_PATH/vimrc_go
 endif
 " Ethereum solidity 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_sol")
-	so $YP_VIMRC_DIR/yp_vimrc_sol
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_sol")
+	so $UNIXENV_VIMRC_PATH/vimrc_sol
 endif
 " yaml 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_yaml")
-	so $YP_VIMRC_DIR/yp_vimrc_yaml
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_yaml")
+	so $UNIXENV_VIMRC_PATH/vimrc_yaml
 endif
 " lua 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_lua")
-	so $YP_VIMRC_DIR/yp_vimrc_lua
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_lua")
+	so $UNIXENV_VIMRC_PATH/vimrc_lua
 endif
 " markdown 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_md")
-	so $YP_VIMRC_DIR/yp_vimrc_md
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_md")
+	so $UNIXENV_VIMRC_PATH/vimrc_md
 endif
 " reStructuredText 설정
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_rst")
-	so $YP_VIMRC_DIR/yp_vimrc_rst
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_rst")
+	so $UNIXENV_VIMRC_PATH/vimrc_rst
 endif
 
 
 """ ========================================================
-" call yp_vimrc_end
-if filereadable($YP_VIMRC_DIR . "/yp_vimrc_end")
-	so $YP_VIMRC_DIR/yp_vimrc_end
+" call vimrc_end
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_end")
+	so $UNIXENV_VIMRC_PATH/vimrc_end
 endif
 

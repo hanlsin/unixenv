@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+alias ga="git add --patch"
+
+if [[ "${DEFAULT_SHELL}" == "ZSH" ]]; then
+    # shortcuts in the git plugin of zsh
+    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
+    # freq.
+    #   - ghh: git help
+    #   - glgp: 커밋 로그 상세보기 (소스포함)
+    #   - gloga: 커밋 그래프 전체
+    #   - glola: 커밋 그래프 전체 with 추가 정보
+    #   - gfa: git fetch --all --prune
+    #   - gfg <keyword>: git ls-files | grep: git 등록된 파일 찾기
+    #   - gba: git branch -a: 모든 브랜치 보기
+    #   - gsw: git switch
+    #   - grs: git restore
+    alias gitlog="glg"
+    alias gitlogd="glgp"
+    alias gitgraph="glola"
+    alias gitgraphs="glola --stat"
+    alias gitgraphd="glola --stat -p"
+    alias gitref="git reflog"
+fi

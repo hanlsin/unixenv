@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export UNIXENV_VIMRC_PATH=${UNIXENV_HOME}/vimrc
+
+alias vim="vi"

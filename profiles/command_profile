@@ -1,8 +1,24 @@
 #!/bin/bash
 #
-# @brief  Set environment for compound commands.
+# @brief  Set environment for comprehensive commands.
 #
 # @author   Yun Woo Park
+
+# for 'ls' command
+#export CLICOLOR=1
+#export LSCOLORS=
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	alias ls='ls --color=auto'
+	alias ll='ls --color=auto -alh'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	alias ls='ls -G'
+	alias ll='ls -G -alh'
+else
+	alias ll='ls -G -alh'
+fi
+
+# netcheck shortcut
+alias netcheck="lsof -i -P | grep -i listen"
 
 # find the process ID
 # 'findpid eclimd' or 'findpid yun eclimd'

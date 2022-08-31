@@ -1,0 +1,4 @@
+" call default_vimrc
+if filereadable($UNIXENV_VIMRC_PATH . "/default_vimrc")
+	so $UNIXENV_VIMRC_PATH/default_vimrc
+endif

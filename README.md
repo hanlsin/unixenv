@@ -1,13 +1,12 @@
 # unixenv
 
-This is a repository to store YP's common enviroment files for unix-like OS.
+This is a repository to setup a terminal environment on UNIX-like OS: such as Ubuntu, Mac, etc.
 
 ## Support Environments
 
-* bash
-* zsh
-* vim
-* tmux
+- shll: bash | zsh
+- vim
+- tmux
 
 ## How to use?
 
@@ -17,14 +16,18 @@ This is a repository to store YP's common enviroment files for unix-like OS.
 git clone https://github.com/hanlsin/unixenv.git ~/.unixenv
 ```
 
+or clone this repository and set `UNIXENV_HOME=<where_the_repository_path_id>`.
+
+### Setup profiles
+
+```bash
+~/.unixenv/setup.sh
+```
+
 ### Create symbolic links
 
 ```bash
-ln -s ~/.unixenv/bash_aliases ~/.bash_aliases
-ln -s ~/.unixenv/yp_profile ~/.yp_profile
-ln -s ~/.unixenv/yp_env_vars ~/.yp_env_vars
-ln -s ~/.unixenv/yp_vimrc ~/.yp_vimrc
-ln -s ~/.unixenv/vimrc ~/.vimrc
+ln -s ~/.unixenv/unixenv_vimrc ~/.vimrc
 ln -s ~/.unixenv/p10k.zsh ~/.p10k.zsh
 touch ~/.local_env
 ```
@@ -32,7 +35,6 @@ touch ~/.local_env
 There is a new env file to prevent uploading critical inforation on github accidently.
 
 You can insert any aliases or variables in `~/.local_env`, and it will be safe from accidental uploading.
-
 
 ## Use [screenFetch](https://github.com/KittyKatt/screenFetch)
 
@@ -158,9 +160,8 @@ Input the below in the `.zshrc` file.
 
 I recommend to install the `Meslo Nerd Font` font via
 
-* [Powerlevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
-* [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
-
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
 #### Setup personal envs
 
@@ -209,4 +210,3 @@ ln -s ~/.unixenv/conkyrc ~/.conkyrc
 mkdir -p ~/.config/autostart
 ln -s ~/.unixenv/conky.desktop ~/.config/autostart/conky.desktop
 ```
-
