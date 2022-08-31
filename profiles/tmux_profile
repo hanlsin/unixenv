@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# TMUX 관련 alias
+alias tm='tmux'
+alias tl='tmux ls'
+alias ta='tmux attach -t '
+alias tk='tmux kill-session -t '

@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+UNIXENV_PROFILE_PATH=${UNIXENV_HOME}/profiles
+
+# for YP personal bash scripts
+if [ -f ${UNIXENV_PROFILE_PATH}/default_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/default_profile
+fi
+
+# prompt profile
+if [[ "${DEFAULT_SHELL}" == "BASH" ]]; then
+	if [ -f ${UNIXENV_PROFILE_PATH}/prompt_profile ]; then
+		. ${UNIXENV_PROFILE_PATH}/prompt_profile
+		fn_fancy_prompt
+	fi
+fi
+
+# command profile
+if [ -f ${UNIXENV_PROFILE_PATH}/command_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/command_profile
+	alias findpid='fn_findpid'
+fi
+
+# vim profile
+if [ -f ${UNIXENV_PROFILE_PATH}/vim_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/vim_profile
+fi
+
+# tmux profile
+if [ -f ${UNIXENV_PROFILE_PATH}/tmux_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/tmux_profile
+fi
+
+# git profile
+if [ -f ${UNIXENV_PROFILE_PATH}/git_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/git_profile
+fi
+
+# python profile
+if [ -f ${UNIXENV_PROFILE_PATH}/python_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/python_profile
+fi
+
+# golang profile
+if [ -f ${UNIXENV_PROFILE_PATH}/golang_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/golang_profile
+fi
+
+# database profile
+if [ -f ${UNIXENV_PROFILE_PATH}/db_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/db_profile
+fi
+
+# docker profile
+if [ -f ${UNIXENV_PROFILE_PATH}/docker_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/docker_profile
+fi
+
+# ROS profile
+#if [ -f ${UNIXENV_PROFILE_PATH}/ros_profile ]; then
+#	. ${UNIXENV_PROFILE_PATH}/ros_profile
+#fi
+
+# local settings.
+if [ -f ~/.local_profile ]; then
+	. ~/.local_profile
+fi
