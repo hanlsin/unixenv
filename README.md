@@ -1,6 +1,6 @@
 # unixenv
 
-This is a repository to setup a terminal environment on UNIX-like OS: such as Ubuntu, Mac, etc.
+This is a repository to setup a terminal environment easily on UNIX-like OS: such as Ubuntu, Mac, etc.
 
 ## Support Environments
 
@@ -16,7 +16,7 @@ This is a repository to setup a terminal environment on UNIX-like OS: such as Ub
 git clone https://github.com/hanlsin/unixenv.git ~/.unixenv
 ```
 
-or clone this repository and set `UNIXENV_HOME=<where_the_repository_path_id>`.
+or clone this repository and set `UNIXENV_HOME=<where_the_repository_path_is>`.
 
 ### Setup profiles
 
@@ -34,31 +34,7 @@ touch ~/.local_env
 
 There is a new env file to prevent uploading critical inforation on github accidently.
 
-You can insert any aliases or variables in `~/.local_env`, and it will be safe from accidental uploading.
-
-## Use [screenFetch](https://github.com/KittyKatt/screenFetch)
-
-To disply Bash information.
-
-### [Install](https://github.com/KittyKatt/screenFetch/wiki/Installation)
-
-#### Mac
-
-```bash
-brew install screenfetch
-```
-
-#### Ubuntu
-
-```bash
-sudo apt install screenfetch
-```
-
-### Set in bash
-
-```bash
-echo "screenfetch" >> ~/.local_env
-```
+You can insert any aliases or variables in `~/.local_profile`, and it will be safe from accidental uploading.
 
 ## Prepare and Setup Vim
 
@@ -172,7 +148,7 @@ vi ~/.zshrc
 Input the below in the `.zshrc` file.
 
 ```
-[[ ! -f $HOME/.bash_aliases ]] || source $HOME/.bash_aliases
+[[ ! -f ~/.unixenv/.unixenv_profile ]] || ~/.unixenv/.unixenv_profile
 ```
 
 #### Use Zsh on Tmux
@@ -195,18 +171,4 @@ ln -s ~/.unixenv/tmux.bash.conf ~/.tmux.conf
 
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-```
-
-## Prepare and Setup [Conky](https://github.com/brndnmtthws/conky) for Linux GUI
-
-```bash
-sudo apt-get install conky-all
-ln -s ~/.unixenv/conkyrc ~/.conkyrc
-```
-
-~~And, launch `conky` at session start~~(not working on Ubuntu)
-
-```bash
-mkdir -p ~/.config/autostart
-ln -s ~/.unixenv/conky.desktop ~/.config/autostart/conky.desktop
 ```
