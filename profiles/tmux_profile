@@ -5,3 +5,7 @@ alias tm='tmux'
 alias tl='tmux ls'
 alias ta='tmux attach -t '
 alias tk='tmux kill-session -t '
+# e.g. tcp 1000 > ~/tmux.history
+alias tcp='tmux capture-pane -pS -'
+alias tcp1='tmux capture-pane -pS -1000 > ~/tmux.1k.history'
+alias tcp10='tmux capture-pane -pS -10000 > ~/tmux.10k.history'
