@@ -27,7 +27,6 @@ or clone this repository and set `UNIXENV_HOME=<where_the_repository_path_is>`.
 ### Create symbolic links
 
 ```bash
-ln -s ~/.unixenv/unixenv_vimrc ~/.vimrc
 ln -s ~/.unixenv/p10k.zsh ~/.p10k.zsh
 touch ~/.local_env
 ```
@@ -37,6 +36,10 @@ There is a new env file to prevent uploading critical inforation on github accid
 You can insert any aliases or variables in `~/.local_profile`, and it will be safe from accidental uploading.
 
 ## Prepare and Setup Vim
+
+```bash
+ln -s ~/.unixenv/unixenv_vimrc ~/.vimrc
+```
 
 ### Prepare plugin managers
 
