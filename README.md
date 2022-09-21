@@ -37,8 +37,19 @@ You can insert any aliases or variables in `~/.local_profile`, and it will be sa
 
 ## Prepare and Setup Vim
 
+Create a symbolic link for `~/.vimrc`
+
 ```bash
 ln -s ~/.unixenv/unixenv_vimrc ~/.vimrc
+```
+
+or, if already `~/.vimrc` exists, add the below context into the file.
+
+```
+" call default_vimrc
+if filereadable($UNIXENV_VIMRC_PATH . "/default_vimrc")
+    so $UNIXENV_VIMRC_PATH/default_vimrc
+endif
 ```
 
 ### Prepare plugin managers
