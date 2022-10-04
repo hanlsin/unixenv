@@ -7,7 +7,7 @@ case $SHELL in
         ;;
     */bash)
         UNIXENV_SHELL="BASH"
-        UNIXENV_SHELL_RC_FILE="~/.bashrc"
+        UNIXENV_SHELL_RC_FILE="${HOME}/.bashrc"
         ;;
     *)
         UNIXENV_SHELL="UNKOWN_SH"
