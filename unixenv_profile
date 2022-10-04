@@ -6,7 +6,7 @@ export LC_CTYPE="en_US.UTF-8"
 
 UNIXENV_PROFILE_PATH=${UNIXENV_HOME}/profiles
 
-# for YP personal bash scripts
+# for defualt bash scripts
 if [ -f ${UNIXENV_PROFILE_PATH}/default_profile ]; then
 	. ${UNIXENV_PROFILE_PATH}/default_profile
 fi
