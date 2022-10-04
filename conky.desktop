@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=/usr/bin/conky
-Name=Conky
-Comment=Autostart conky at login
