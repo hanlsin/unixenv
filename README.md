@@ -28,7 +28,7 @@ or clone this repository and set `UNIXENV_HOME=<where_the_repository_path_is>`.
 
 ```bash
 ln -s ~/.unixenv/p10k.zsh ~/.p10k.zsh
-touch ~/.local_env
+touch ~/.local_profile
 ```
 
 There is a new env file to prevent uploading critical inforation on github accidently.
