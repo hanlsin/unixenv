@@ -27,6 +27,10 @@ Plugin 'tmhedberg/SimpylFold'
 "Plugin 'klen/rope-vim'
 Plugin 'ervandew/supertab'
 
+"" RUST
+" https://github.com/rust-lang/rust.vim
+Plugin 'rust-lang/rust.vim'
+
 "" Python Syntax Checking/Highlighting
 "Plugin 'scrooloose/syntastic'
 " Issue: https://github.com/vim-syntastic/syntastic/issues/1924
