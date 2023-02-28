@@ -138,13 +138,6 @@ endif
 
 
 """ ========================================================
-" call vundle
-if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_vundle")
-	so $UNIXENV_VIMRC_PATH/vimrc_vundle
-endif
-
-
-""" ========================================================
 """ 추가 vimrc 로딩.
 " python 설정
 "au FileType python so $UNIXENV_VIMRC_PATH/vimrc_py
