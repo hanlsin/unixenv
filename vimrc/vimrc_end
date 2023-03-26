@@ -22,10 +22,10 @@ highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
 """ ========================================================
 """ NERDTree
 """ https://github.com/preservim/nerdtree
+let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-" open a file in new tab.
-"let NERDTreeMapOpenInTab='<ENTER>'
+
 " open a NERDTree automatically when vim starts up.
 "autocmd VimEnter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
