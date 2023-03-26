@@ -56,6 +56,10 @@ Plug 'tpope/vim-markdown'
 " https://github.com/ryanoasis/vim-devicons
 Plug 'ryanoasis/vim-devicons'
 
+" OneDarkPro theme
+" https://github.com/olimorris/onedarkpro.nvim
+"Plug 'olimorris/onedarkpro.nvim'
+
 " XXX Add all your plugins here
 "       , and then :PlugInstall
 "       To remove, just remove line, and then :PlugUpdate and :PlugClean
