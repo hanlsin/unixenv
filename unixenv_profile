@@ -60,6 +60,11 @@ if [ -f ${UNIXENV_PROFILE_PATH}/docker_profile ]; then
 	. ${UNIXENV_PROFILE_PATH}/docker_profile
 fi
 
+# neovim profile
+if [ -f ${UNIXENV_PROFILE_PATH}/nvim_profile ]; then
+	. ${UNIXENV_PROFILE_PATH}/nvim_profile
+fi
+
 # ROS profile
 #if [ -f ${UNIXENV_PROFILE_PATH}/ros_profile ]; then
 #	. ${UNIXENV_PROFILE_PATH}/ros_profile

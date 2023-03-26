@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+export XDG_CONFIG_HOME=${UNIXENV_HOME}
+export UNIXENV_NVIM_PATH=${UNIXENV_HOME}/nvim
+
+alias nv="nvim"

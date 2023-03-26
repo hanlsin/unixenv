@@ -1,0 +1,4 @@
+" call default_vimrc
+if filereadable($UNIXENV_NVIM_PATH . "/init.vim")
+	so $UNIXENV_NVIM_PATH/init.vim
+endif
