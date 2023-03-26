@@ -10,7 +10,7 @@ fi
 
 # check the directory exists
 if [ ! -d "${UNIXENV_HOME}" ]; then
-    echo "Cannot find the UNIXENV_HOME vlalue."
+    echo "Cannot find the UNIXENV_HOME value."
     echo "Please follow the instruction first to setup properly:"
     echo ""
     echo "clone the git repository in a default directory"
