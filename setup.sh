@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Add comment by dev1"
+
 # check unixenv home path
 if [[ -z "${UNIXENV_HOME}" ]]; then
     UNIXENV_HOME=${HOME}/.unixenv
