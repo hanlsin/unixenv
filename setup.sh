@@ -11,6 +11,7 @@ else
 fi
 
 echo "test 1111"
+echo "test 2222"
 
 
 # check the directory exists
