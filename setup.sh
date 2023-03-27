@@ -10,6 +10,8 @@ else
     _IS_UNIXENV_HOME_IN_RC="TRUE"
 fi
 
+
+
 # check the directory exists
 if [ ! -d "${UNIXENV_HOME}" ]; then
     echo "Cannot find the UNIXENV_HOME data2."
