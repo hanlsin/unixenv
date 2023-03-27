@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Add comment by dev2"
+
 # check unixenv home path
 if [[ -z "${UNIXENV_HOME}" ]]; then
     UNIXENV_HOME=${HOME}/.unixenv
@@ -8,9 +10,11 @@ else
     _IS_UNIXENV_HOME_IN_RC="TRUE"
 fi
 
+
+
 # check the directory exists
 if [ ! -d "${UNIXENV_HOME}" ]; then
-    echo "Cannot find the UNIXENV_HOME value."
+    echo "Cannot find the UNIXENV_HOME data2."
     echo "Please follow the instruction first to setup properly:"
     echo ""
     echo "clone the git repository in a default directory"
