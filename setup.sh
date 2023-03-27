@@ -10,6 +10,7 @@ else
     _IS_UNIXENV_HOME_IN_RC="TRUE"
 fi
 
+echo "test 123123"
 
 
 # check the directory exists
