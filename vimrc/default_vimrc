@@ -47,20 +47,6 @@ set foldlevel=99
 " When editing a file, always jump to the last cursor position.
 autocmd BufReadPost * if line("'\"") && line("'\"") <= line("$") | exe "normal `\"" | endif
 
-""" ========================================================
-""" vim buffer
-"""  - :e : open new buffer
-"""  - :b <number> : go to the number buffer
-"""  - :bd : close buffer
-"" open new buffer
-"nnoremap <C-S-t> :enew<Enter>
-"" move to previous buffer
-"nnoremap <C-F5> :bprevious!<Enter>
-"" move to next buffer
-"nnoremap <C-F6> :bnext!<Enter>
-"" close buffer and move previous
-"nnoremap <C-F4> :bp <BAR> bd #<Enter>
-
 
 """ ========================================================
 """ Mapping keys
@@ -106,8 +92,11 @@ if !exists("disable_vim_window_cmds") || disable_vim_window_cmds == 0
 	"nmap <buffer> <F6> <C-w><C-w>
 endif
 
-"" Moving tab pages
-"" http://vim.wikia.com/wiki/Using_tab_pages
+""" ========================================================
+""" tab
+"""     - :tabedit <file|dir>
+"""     - :tabs : list all tabs including their displayed windows
+""" http://vim.wikia.com/wiki/Using_tab_pages
 if !exists("disable_vim_tab_pages_traversal") || disable_vim_tab_pages_traversal == 0
 	" go to next tab
 	nmap <C-T><C-T> :tabnext<CR>
@@ -118,7 +107,15 @@ endif
 " change <leader> Key from default '\'
 let mapleader=","
 
-"" Moving buffer traversal
+""" ========================================================
+""" buffer
+"""     - :e : open new buffer
+"""     - :b <number> : go to the number buffer
+"""     - :bd : close buffer
+"" open new buffer
+"nnoremap <C-S-t> :enew<Enter>
+"" close buffer and move previous
+"nnoremap <C-F4> :bp <BAR> bd #<Enter>
 if !exists("disable_vim_buffer_traversal") || disable_vim_buffer_traversal == 0
 	" show all buffers. :buffers, :ls
 	nmap <leader>, :ls<CR>:e #
