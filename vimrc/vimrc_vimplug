@@ -34,11 +34,19 @@ Plug 'preservim/nerdtree'
 " https://github.com/python-mode/python-mode
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
+"" Color Schemes
 " ZENBURN 
 " http://kippura.org/zenburnpage/
 " https://github.com/jnurmine/Zenburn
 " https://vimawesome.com/plugin/zenburn
-Plug 'https://github.com/jnurmine/Zenburn', { 'colorscheme': 'zenburn' }
+"Plug 'https://github.com/jnurmine/Zenburn', { 'colorscheme': 'zenburn' }
+Plug 'https://github.com/jnurmine/Zenburn'
+" everforest
+" https://github.com/sainnhe/everforest
+Plug 'sainnhe/everforest'
+" nightfox
+" https://github.com/EdenEast/nightfox.nvim
+Plug 'EdenEast/nightfox.nvim'
 
 " vim-go
 " https://github.com/fatih/vim-go

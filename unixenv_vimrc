@@ -1,4 +1,23 @@
 " call default_vimrc
 if filereadable($UNIXENV_VIMRC_PATH . "/default_vimrc")
-	so $UNIXENV_VIMRC_PATH/default_vimrc
+so $UNIXENV_VIMRC_PATH/default_vimrc
 endif
+
+""" select Color Scheme
+"" onehalf
+let g:airline_theme='onehalfdark'
+colorscheme onehalfdark
+
+"" zenburn
+"colorscheme zenburn
+
+"" everforest
+" https://github.com/sainnhe/everforest/blob/master/doc/everforest.txt
+"set background=dark
+"let g:everforest_background = 'soft'
+"let g:everforest_better_performance = 1
+"let g:airline_theme = 'everforest'
+"colorscheme everforest
+
+"" nightfox
+"colorscheme nightfox
