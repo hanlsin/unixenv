@@ -194,6 +194,11 @@ if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_rst")
 	so $UNIXENV_VIMRC_PATH/vimrc_rst
 endif
 
+" ini 설정
+if filereadable($UNIXENV_VIMRC_PATH . "/vimrc_ini")
+	so $UNIXENV_VIMRC_PATH/vimrc_ini
+endif
+
 
 """ ========================================================
 " call vimrc_end
