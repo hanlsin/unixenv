@@ -1,5 +1,5 @@
 """ Yun Woo Park (hanlsin@gmail.com) 12/13/2016
-""" vim configuration for Golang.
+""" vim configuration for YAML files.
 
 """ Indentation
 au BufNewFile,BufRead *.yaml,*.yml

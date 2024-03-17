@@ -1,5 +1,5 @@
-""" Yun Woo Park (hanlsin@gmail.com) 12/13/2016
-""" vim configuration for Golang.
+""" Yun Woo Park (hanlsin@gmail.com) 3/17/2024
+""" vim configuration for ini or config files.
 
 """ Indentation
 au BufNewFile,BufRead *.ini,*.conf
